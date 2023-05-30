@@ -1,0 +1,4 @@
+j ai fais une migration deja avec la table client 
+`id`, `nom_complet`, `adresse`, `date_naissance`, `lieu_naissance`,
+ `pays_residence`, `photo`, `type_piece_identite`,
+ `numero_piece_identite`, `date_expiration_piece_identite`, `users_id`
