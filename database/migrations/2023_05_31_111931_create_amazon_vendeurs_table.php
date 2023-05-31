@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('amazon_vendeurs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string("nom_complet")->nullable(false);
+            $table->string("adresse")->nullable(false);
+            $table->string("pays_residence")->nullable(false);
+            $table->string("site_web")->nullable(false);
+            $table->string("numero_registre_commerce")->nullable(false);
+            $table->string("regime_taxes")->nullable(false);
+            $table->string("photo")->nullable(false);
+            $table->string("visuel_recto_piece_identite")->nullable(false);
+            $table->string("visuel_verso_piece_identite")->nullable(false);
+            $table->int("plan_ventes_id")->nullable(false);
+            $table->int("users_id")->nullable(false);
         });
     }
 

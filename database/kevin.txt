@@ -1,13 +1,18 @@
-j ai fais une migration deja avec la table client 
+table client 
 `id`, `nom_complet`, `adresse`, `date_naissance`, `lieu_naissance`,
  `pays_residence`, `photo`, `type_piece_identite`,
  `numero_piece_identite`, `date_expiration_piece_identite`, `users_id`
 
+table vendeurs
+`id`, `nom_complet`, `adresse`, `pays_residence`, `site_web`,
+ `numero_registre_commerce`, `regime_taxes`, `photo`,
+ `visuel_recto_piece_identite`, `visuel_verso_piece_identite`,
+  `plan_ventes_id`, `users_id`
  Sous-branche 1: Actor-migrations
 
-- users
-- clients
-- vendeurs
+- users .
+- clients .
+- vendeurs 
 - fournisseurs
 - abonnements_prime
 - abonnement_clients
