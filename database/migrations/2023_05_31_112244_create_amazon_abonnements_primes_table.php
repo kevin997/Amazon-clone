@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('amazon_abonnements_primes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string("libelle")->nullable(false);
+            $table->string("formule")->nullable(false);
+            $table->string("forfait")->nullable(false);
+            $table->string("details")->nullable(false);
+            $table->date("cree_le")->nullable(false);
+            $table->date("modifie_le")->nullable(false);
         });
     }
 

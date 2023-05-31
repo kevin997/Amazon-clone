@@ -15,13 +15,20 @@ table fournisseurs
  `pays_residence`,
  `site_web`, `secteur_activite`, `users_id` 
 
- 
+table abonnements_prime
+`id`, `libelle`, `formule`, `forfait`,
+ `details`, `cree_le`, `modifie_le`
+
 - users .
 - clients .
 - vendeurs .
 - fournisseurs .
-- abonnements_prime
+- abonnements_prime .
 - abonnement_clients
 - solutions paiement client (carte de credit/compte bancaire)
 - solutions paiement vendeur (carte de credit/compte bancaire)
 - solutions paiement fournisseur (carte de credit/compte bancaire)
+
+users_id est une clef etrangere, 
+$table->foreignId('users_id')->constrained()
+->onDelete('cascade')->onUpdate('cascade');

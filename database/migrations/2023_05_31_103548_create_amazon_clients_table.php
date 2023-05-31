@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("type_piece_identite")->nullable(false);
             $table->string("numero_piece_identite")->nullable(false);
             $table->date("date_expiration_piece_identite")->nullable(false);
-            $table->int("users_id")->nullable(false);
+            $table->foreignId('users_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
