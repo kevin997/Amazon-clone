@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('amazon_fournisseurs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->String("nom_complet")->nullable(false);
+            $table->String("adresse")->nullable(false);
+            $table->String("contact")->nullable(false);
+            $table->String("pays_residence")->nullable(false);
+            $table->String("site_web")->nullable(false);
+            $table->String("secteur_activite")->nullable(false);
+            $table->int("users_id")->nullable(false);
         });
     }
 

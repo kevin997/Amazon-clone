@@ -10,10 +10,16 @@ table vendeurs
   `plan_ventes_id`, `users_id`
  Sous-branche 1: Actor-migrations
 
+table fournisseurs
+`id`, `nom_complet`, `adresse`, `contact`,
+ `pays_residence`,
+ `site_web`, `secteur_activite`, `users_id` 
+
+ 
 - users .
 - clients .
-- vendeurs 
-- fournisseurs
+- vendeurs .
+- fournisseurs .
 - abonnements_prime
 - abonnement_clients
 - solutions paiement client (carte de credit/compte bancaire)
