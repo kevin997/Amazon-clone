@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('amazon_detail_commandes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('amazon_commande_id');
-            $table->foreignId('amazon_produit_id');
+            $table->foreignId('amazon_produit_id');            
             $table->double('prix_vente');
             $table->double('taux_remise');
-            $table->double('quantite_commandee');
+            $table->double('quantite_commandee');            
             $table->foreign('amazon_commande_id')->references('id')->on('amazon_commandes')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('amazon_produit_id')->references('id')->on('amazon_produits')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
