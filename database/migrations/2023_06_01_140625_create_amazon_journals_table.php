@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plan_ventes', function (Blueprint $table) {
+        Schema::create('amazon_journals', function (Blueprint $table) {
             $table->id();
-            $table->double('forfait');
-            $table->double('frais_additionnels');
-            $table->char('details', 150);
+            $table->foreignId('user_id');            
+            $table->char('objet', 150);
             $table->timestamp('cree_le')->nullable();
-            $table->timestamp('modifie_le')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
     
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plan_ventes');
+        Schema::dropIfExists('amazon_journals');
     }
 };
