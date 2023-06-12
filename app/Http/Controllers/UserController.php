@@ -88,9 +88,12 @@ class UserController extends Controller
     public function profile(Request $request){
 
         return response()->json([
-                "status" => 1,
-                "message" => "Vos informations de prfile",
-                "datas" => Auth::user()
-            ]);
+            "status" => 1,
+            "message" => "Vos informations de prfile",
+            "datas" => Auth::user()
+        ]);
+
+        // redirection vers l'interface d'affichage
+        
     }
 }
