@@ -26,36 +26,40 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
+        // envoie de l'email de verification
+        $user->sendEmailVerificationNotification();
+
         // reponse
         return response()->json([
-            'status' => 1,
-            'message' => 'compte creer avec succes'
+            "status" => 1,
+            "message" => "compte creer avec succes"
         ]);
     }
 
     public function login(Request $request){
         // validation des donnees
         $request->validate([
-            'email' =>'required|email',
-            'password' =>'required'
+            "email" =>"required|email",
+            "password" =>"required"
         ]);
 
         // verifier si l'utilisateur existe
-        $user = User::where('email', '=', $request->email)->first();
+        $user = User::where("email", "=", $request->email)->first();
 
         if($user){
             if(Hash::check($request->email, $user->email)){
                 // creer un jeton/token
-                $token = $user->createToken('auth_token')->plainTextToken;
-
+                $token = $user->createToken("auth_token")->plainTextToken;
+                
                 // connexion reussie
                 return response()->json([
-                    'status' => 1,
-                    'message' => 'Connexion reussie',
-                    'access_token' => $token
+                    "status" => 1,
+                    "message" => "Connexion reussie",
+                    "access_token" => $token
                 ], 200);
 
                 // redirection vers le dashboard correspondant
+                
 
             }else{
                 return response()->json([
@@ -74,7 +78,13 @@ class UserController extends Controller
     }
 
     public function logout($id){
-        
+        // deconnexion
+        Auth::user()->tokens()->delete();
+
+        return response()->json([
+            "status" => 1,
+            "message" => "Deconnexion reussi"
+        ]);
     }
 
     public function becomeSeller($id){
@@ -87,6 +97,7 @@ class UserController extends Controller
 
     public function profile(Request $request){
 
+        // afficher les informations de profile
         return response()->json([
             "status" => 1,
             "message" => "Vos informations de prfile",

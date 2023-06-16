@@ -88,7 +88,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         // Verification de l'email
         Fortify::verifyEmailView(function () {
-            return view('auth.verify');
+            return view('auth.verify-email');
         });
 
         // Confirmation du mot de passe
