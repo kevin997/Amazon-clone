@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -85,17 +86,19 @@ class UserController extends Controller
 
     }
 
-    public function verify(Request $request){
-        $user = User::findOrFail($request->id);
+    public function logout(Request $request){
+        //recuperation des informations de l'utilisateur actuel connecte
+        Auth::user()->tokens()->delete();
+        //$request->user()->tokens()->delete();
 
-        if ($user->email_verified_at) {
-            return '';
-        }
-    
-        if ($user->markEmailAsVerified()) {
-            event(new Verified($user));
-        }
-    
-        return redirect()->away('app://open'); // The deep link
-    }    
+        // deconnexion reussie
+        return response()->json([
+            "status_code" => 1,
+            "message" => "Deconnexion reussie",
+        ]);
+
+        // redirection vers index
+                //......
+
+    }
 }
