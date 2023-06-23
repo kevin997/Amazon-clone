@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,18 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     // deconnexion de l'utilisateur  
     Route::post('logout',   [UserController::class, 'logout']);
+
+    // enregistrer informations de profil
+    Route::post('/create_profil', [UserProfileController::class, 'create']);
+
+    // mise a jour du profil
+    Route::patch('/update_profil/{id}', [UserProfileController::class, 'update']);
+
+    // detail du profil
+    Route::get('/edit_profil/{id}', [UserProfileController::class, 'edit']);
+
+    // delete profil
+    Route::delete('/delete_profil/{id}', [UserProfileController::class, 'delete']);
 
     // obtenir les infos de l'utilisateur connecte
     Route::get('/user', function (Request $request) {

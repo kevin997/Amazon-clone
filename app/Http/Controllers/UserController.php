@@ -89,7 +89,6 @@ class UserController extends Controller
     public function logout(Request $request){
         //recuperation des informations de l'utilisateur actuel connecte
         Auth::user()->tokens()->delete();
-        //$request->user()->tokens()->delete();
 
         // deconnexion reussie
         return response()->json([
@@ -100,5 +99,9 @@ class UserController extends Controller
         // redirection vers index
                 //......
 
+    }
+
+    public function another(){
+        
     }
 }
