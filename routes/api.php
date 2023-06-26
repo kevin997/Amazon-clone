@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,6 @@ Route::post('register', [UserController::class, 'register']);
 // connexion
 Route::post('login', [UserController::class, 'login']);
 
-
 // Groupe de routes protegees (uniquement pour les utilisateurs authentifies)
 Route::group(['middleware' => ['auth:sanctum']], function() {
 
@@ -45,6 +45,21 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     // delete profil
     Route::delete('/delete_profil/{id}', [UserProfileController::class, 'delete']);
+
+    // verification email
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+    
+        return response()->json([
+            'message' => 'Votre email vient d\'etre verifie.']);
+    })->middleware(['auth', 'signed'])->name('verification.verify');
+
+    // resend email for verification
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+    
+        return back()->with('message', 'Verification link sent!');
+    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
     // obtenir les infos de l'utilisateur connecte
     Route::get('/user', function (Request $request) {
