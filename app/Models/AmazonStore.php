@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\User;
+
 
 class AmazonStore extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
+
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'nom',
@@ -24,6 +27,7 @@ class AmazonStore extends Model
         'user_id',
         'etat',
         'cree_le',
+        'modifie_le',
     ];
 
     /**

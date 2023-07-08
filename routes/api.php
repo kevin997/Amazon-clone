@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\BecomeSellerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
-use App\Http\Controllers\BecomeSellerController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,8 +70,11 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
         ]);
     })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-    // devenir un vendeur
+    // devenir un vendeur 
     Route::post('/become_seller', [BecomeSellerController::class, 'createStore']);
+
+    // mise a jour du store (boutique)
+    Route::patch('/update_store/{id}', [StoreController::class, 'update']);
 
     // obtenir les infos de l'utilisateur connecte
     Route::get('/user', function (Request $request) {

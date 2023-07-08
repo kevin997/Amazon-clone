@@ -68,7 +68,7 @@ class BecomeSellerController extends Controller
                     return response()->json([
                         "status_code" => 1,
                         "message" => "Operation reussie, vous etes desormais vendeur sur Amazon.",
-                        "store" => $store
+                        "store_name" => $store->nom
                     ], 201);
                     
                     // 3- redirection vers enregistrement infos paiement
