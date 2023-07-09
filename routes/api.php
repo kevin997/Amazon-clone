@@ -73,8 +73,20 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     // devenir un vendeur 
     Route::post('/become_seller', [BecomeSellerController::class, 'createStore']);
 
+    // creer un store pour un vendeur
+    Route::post('/create_store', [StoreController::class, 'create']);
+
     // mise a jour du store (boutique)
     Route::patch('/update_store/{id}', [StoreController::class, 'update']);
+
+    // fermeture du store (boutique) par son proprietaire
+    Route::patch('/close_store/{id}', [StoreController::class, 'close']);
+
+    // suppression du store (boutique) par l'administrateur
+    Route::delete('/delete_store/{id}', [StoreController::class, 'delete']);
+
+    // editer la liste des stores pour vendeur
+    Route::get('/edit_store/{id}', [StoreController::class, 'edit']);
 
     // obtenir les infos de l'utilisateur connecte
     Route::get('/user', function (Request $request) {
