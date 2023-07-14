@@ -89,7 +89,7 @@ class StoreController extends Controller
                     "status_code" => 1,
                     "message" => "Mise a jour de la boutique reussie.",
                     "store" => $store
-                ], 201);
+                ], 200);
 
                 // redirection vers dashboard
                 //........
@@ -127,7 +127,7 @@ class StoreController extends Controller
                     "status_code" => 1,
                     "message" => "Fermeture de la boutique ".$store->nom." reussie.",
                     "store" => $store
-                ], 201);
+                ], 200);
 
             } catch (Exception $e) {
                 return response()->json($e);
@@ -154,7 +154,7 @@ class StoreController extends Controller
                 "status_code" => 1,
                 "message" => "Suppression de la boutique ".$store->nom." reussie.",
                 "store" => $store
-            ], 201);
+            ], 200);
 
         } catch (Exception $e) {
             return response()->json($e);
@@ -170,7 +170,7 @@ class StoreController extends Controller
             "status_code" => 1,
             "message" => "Liste des boutiques de ".$user->name,
             "store" => $store
-        ], 201);
+        ], 200);
 
     }
 }
