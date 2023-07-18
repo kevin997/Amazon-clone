@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_plan_vente', function (Blueprint $table) {
+        Schema::create('amazon_plan_ventes', function (Blueprint $table) {
             $table->id();
             $table->char('name', 25);
             $table->char('details', 255);
-            $table->double('forfait');
+            $table->double('montant');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('amazon_plan_vente');
+        Schema::dropIfExists('amazon_plan_ventes');
     }
 };

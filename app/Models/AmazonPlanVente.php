@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class AmazonPlanVente extends Model
 {
     use HasFactory;
+    protected $table = 'amazon_plan_ventes';
 
     protected $fillable = [
         'name',
         'details',
-        'forfait',
+        'montant',
         'created_at',
         'updated_at',
     ];
