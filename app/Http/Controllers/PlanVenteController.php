@@ -88,7 +88,7 @@ class PlanVenteController extends Controller
     public function show($id)
     {
         // on recupere les informations relative au plan de vente dont on a specifie l'id
-        $plan_vente = AmazonPlanVente::where('id', $id)->get();
+        $plan_vente = AmazonPlanVente::where('id', $id)->first();
 
         return view('plan_vente', [
             'plan_vente' => $plan_vente
@@ -100,14 +100,7 @@ class PlanVenteController extends Controller
      */
     public function edit()
     {
-        // on affiche la liste des plans de vente
-        $plan_vente = AmazonPlanVente::all();
-
-        return response()->json([
-            "status_code" => 1,
-            "message" => "Liste des plans de vente",
-            "plan_vente" => $plan_vente
-        ], 200);
+        // Prevue pour editer un plan
     }
 
     /**
@@ -145,7 +138,7 @@ class PlanVenteController extends Controller
 
         } catch (Exception $e) {
             return response()->json($e);
-        }    
+        }   
 
     }
 
