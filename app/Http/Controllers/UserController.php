@@ -34,7 +34,7 @@ class UserController extends Controller
 
             return response()->json([
                 "status_code" => 200,
-                "status_message" => "Compte creer avec succes.",
+                "status_message" => "Compte creer avec succes. Un email de verification vous a ete envoye pour valider votre compte.",
                 "user" => $user
             ]);
 
@@ -54,7 +54,7 @@ class UserController extends Controller
         ]);
 
         // recuperer les infos de l'utilisateur s'il existe 
-        $user = User::where("email", "=", $request->email)->first();
+        $user = User::where("email", $request->email)->first();
 
         if($user){
             if(Hash::check($request->password, $user->password)){
