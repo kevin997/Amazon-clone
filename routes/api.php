@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BecomeSellerController;
+use App\Http\Controllers\PlanVenteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -141,6 +142,18 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     // editer la liste des stores pour vendeur
     Route::get('/edit_store/{id}', [StoreController::class, 'edit']);
+
+    // creer un plan de vente
+    Route::post('/create_plan_vente', [PlanVenteController::class, 'store']);
+
+    // mise a jour d'un plan de vente
+    Route::patch('/update_plan_vente/{id}', [PlanVenteController::class, 'update']);
+
+    // suppression d'un plan de vente
+    Route::delete('/delete_plan_vente/{id}', [PlanVenteController::class, 'delete']);
+
+    // editer la liste des plans de vente
+    Route::get('/edit_plan_vente', [PlanVenteController::class, 'edit']);
 
     // obtenir les infos de l'utilisateur connecte
     Route::get('/user', function (Request $request) {
