@@ -52,7 +52,7 @@ class UserProfileController extends Controller
     public function update(Request $request, $id){
         // on recupere l'id de l'utilisateur connecte
         $user_id = Auth::user()->id;
-
+        
         // on verifie que le profil a mettre a jour existe
         if(UserProfile::where(['id' => $id, 'user_id' => $user_id])->exists()){
             
