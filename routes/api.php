@@ -103,16 +103,23 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     // verification email
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
+        
+        // on recupere les infos de l'utilisateur connecte
+        $user = Auth::user();
     
         return response()->json([
-            'message' => 'Votre email vient d\'etre verifie.']);
+            'message' => 'Votre email vient d\'etre verifie.',
+            'datas' => $user
+        ]);
     })->middleware(['auth', 'signed'])->name('verification.verify');
 
     // resend email for verification
     Route::post('/email/verification-notification', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
     
-        return back()->with('message', 'Verification link sent!');
+        return response()->json([
+            'message' => 'Un nouveau email de verification vous a ete envoye'
+        ]);
     })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
     // obtenir les infos de l'utilisateur connecte
