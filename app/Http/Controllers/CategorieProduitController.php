@@ -165,11 +165,11 @@ class CategorieProduitController extends Controller
      */
     public function destroy($id)
     {
-        // on recupere le plan de vente a supprimer
+        // on recupere la categorie dont l'id a ete specifiee
         $categorie_produit = AmazonCategorieProduit::where('id', $id)->first();
 
         try {
-            // on supprime le pln de vente
+            // on lance la procedure de suppression du produit
             $categorie_produit->delete();
 
             return response()->json([

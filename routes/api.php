@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\CategorieProduitController;
-use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BecomeSellerController;
+use App\Http\Controllers\CategorieProduitController;
+use App\Http\Controllers\DetailProduitController;
 use App\Http\Controllers\PlanVenteController;
+use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\StockController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -170,6 +173,36 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     // suppression d'une categorie de produit
     Route::delete('/delete_categorie_produit/{id}', [CategorieProduitController::class, 'delete']);
+
+    // creer un produit au profit d'un store
+    Route::post('/create_product', [ProduitController::class, 'store']);
+
+    // mise a jour d'un produit
+    Route::patch('/update_product/{id}', [ProduitController::class, 'update']);
+
+    // sotie d'un produit du catalogue
+    Route::patch('/remove_product/{id}', [ProduitController::class, 'remove']);
+
+    // suppression du produit du catalogue par l'administrateur
+    Route::delete('/delete_product/{id}', [ProduitController::class, 'delete']);
+
+    // editer un produit
+    Route::get('/edit_product/{id}', [ProduitController::class, 'edit']);
+
+    // constituer un stock au profit d'un produit
+    Route::post('/create_stock', [StockController::class, 'store']);
+
+    // mise a jour d'un stock
+    Route::patch('/update_stock/{id}', [StockController::class, 'update']);
+
+    // ajouter une description a un produit
+    Route::post('/create_detail_product', [DetailProduitController::class, 'store']);
+
+    // mise a jour d'une description d'un produit
+    Route::patch('/update_detail_product/{id}', [DetailProduitController::class, 'update']);
+
+    // suppression de detail d'un produit
+    Route::delete('/delete_product/{id}', [DetailProduitController::class, 'delete']);
 
     // obtenir les infos de l'utilisateur connecte
     Route::get('/user', function (Request $request) {
