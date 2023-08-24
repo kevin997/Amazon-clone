@@ -50,50 +50,25 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
+        // afficher la vue register
 
-        // Personnalisation de l'authentification des utilisateurs
-        Fortify::authenticateUsing(function (Request $request) {
-            $user = User::where('email', $request->email)->first();
-     
-            if ($user &&
-                Hash::check($request->password, $user->password)) {
-                return $user;
-            }
-        });
-
-        // redirection vers le formulaire de connexion
-        Fortify::loginView(function () {
-            return view('auth.login');
-        });
-
-        // Authentification  deux facteurs
-        Fortify::twoFactorChallengeView(function () {
-            return view('auth.two-factor-challenge');
-        });
-
-        // Inscription
         Fortify::registerView(function () {
             return view('auth.register');
         });
 
-        // Notification d'envoie du lien de reinitialisation du mot de passe
+        // demander lien de reinitialisation du mot de passe
         Fortify::requestPasswordResetLinkView(function () {
             return view('auth.forgot-password');
         });
-
-        // Reinitialiser le mot de passe
+        
+        // reinitialisation du mot de passe
         Fortify::resetPasswordView(function (Request $request) {
-            return view('auth.passwords.reset', ['request' => $request]);
+            return view('auth.reset-password', ['request' => $request]);
         });
 
-        // Verification de l'email
+        // verification email
         Fortify::verifyEmailView(function () {
             return view('auth.verify-email');
-        });
-
-        // Confirmation du mot de passe
-        Fortify::confirmPasswordView(function () {
-            return view('auth.passwords.confirm');
         });
     }
 }
