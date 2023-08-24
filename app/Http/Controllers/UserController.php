@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
     //
     public function register(Request $request){
         
@@ -77,6 +78,7 @@ class UserController extends Controller
                     'status_message' => 'Mot de passe incorrect'
                 ], 401);
             }
+
         }else{
             return response()->json([
                 'status' => 0,
@@ -85,6 +87,7 @@ class UserController extends Controller
         }
 
     }
+
 
     public function logout(Request $request){
         //recuperation des informations de l'utilisateur actuel connecte
@@ -101,7 +104,34 @@ class UserController extends Controller
 
     }
 
-    public function another(){
+    public function logout($id){
+        // deconnexion
+        Auth::user()->tokens()->delete();
+
+        return response()->json([
+            "status" => 1,
+            "message" => "Deconnexion reussi"
+        ]);
+    }
+
+    public function becomeSeller($id){
+        
+    }
+
+    public function UpdateProfile($id){
+        
+    }
+
+    public function profile(Request $request){
+
+        // afficher les informations de profile
+        return response()->json([
+            "status" => 1,
+            "message" => "Vos informations de prfile",
+            "datas" => Auth::user()
+        ]);
+
+        // redirection vers l'interface d'affichage
         
     }
 }
