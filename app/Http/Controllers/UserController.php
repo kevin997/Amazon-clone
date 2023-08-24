@@ -49,7 +49,6 @@ class UserController extends Controller
             // redirection vers le dashboard correspondant
                 //......
         } catch (Exception $e) {
-            //throw $th;
             return response()->json($e);
         }
     }
@@ -74,6 +73,7 @@ class UserController extends Controller
                     "status_code" => 1,
                     "message" => "Connexion reussie",
                     "user" => $user,
+                    "role_name" => $user->getRoleNames(),
                     "access_token" => $token
                 ], 201);
 

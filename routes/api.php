@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\BecomeSellerController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 use Illuminate\Http\Request;
@@ -121,6 +122,9 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
             'message' => 'Un nouveau email de verification vous a ete envoye'
         ]);
     })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+    // devenir un vendeur
+    Route::post('/become_seller', [BecomeSellerController::class, 'createStore']);
 
     // obtenir les infos de l'utilisateur connecte
     Route::get('/user', function (Request $request) {
