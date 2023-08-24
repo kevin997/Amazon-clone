@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -28,6 +29,12 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make($request->password, ['rounds' => 12]);
             $user->save();
+            
+            // on recupere l'id correspondant au role <<customer>>
+            $role = Role::where('name', 'Customer')->first();         
+            
+            // on assigne le role au nouvel utilisateur
+            $user->assignRole($role->id);
 
             // envoi du mail de verification
             $user->sendEmailVerificationNotification();
@@ -35,7 +42,8 @@ class UserController extends Controller
             return response()->json([
                 "status_code" => 200,
                 "status_message" => "Compte creer avec succes. Un email de verification vous a ete envoye pour valider votre compte.",
-                "user" => $user
+                "user" => $user,
+                "role" => $role
             ]);
 
             // redirection vers le dashboard correspondant
