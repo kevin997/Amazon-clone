@@ -7,21 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class AmazonProduitDetail extends Model
+class AmazonProduitStock extends Model
 {
     use HasFactory;
 
-    protected $table = 'amazon_detail_produits';
+    protected $table = 'amazon_stocks';
 
     protected $fillable = [
         'produit_id',
-        'description',
-        'photo_1',
-        'photo_2',
-        'photo_3',
-        'photo_4',
-        'photo_5',
-        'video_explained',
+        'quantite_disponible',
+        'saisi_par',
         'created_at',
         'updated_at',
     ];
@@ -30,7 +25,7 @@ class AmazonProduitDetail extends Model
      * Summary of user
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function produit():BelongsTo{
+    public function AmazonProduit():BelongsTo{
         return $this->BelongsTo(AmazonProduit::class);
     }
 }

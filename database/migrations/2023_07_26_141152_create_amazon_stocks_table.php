@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('amazon_stocks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->default('12345678');
-            $table->rememberToken();
+            $table->foreignId('produit_id');
+            $table->double('quantite_disponible')->default(1);
+            $table->char('saisi_par', 150);
+            $table->foreign('produit_id')->references('id')->on('amazon_produits')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('amazon_stocks');
     }
 };

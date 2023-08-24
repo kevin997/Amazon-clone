@@ -11,21 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_plan_ventes', function (Blueprint $table) {
-            $table->id();
-            $table->double('forfait');
-            $table->double('frais_additionnels');
-            $table->char('details', 150);
-            $table->timestamp('cree_le')->nullable();
+        Schema::table('amazon_stores', function (Blueprint $table) {
             $table->timestamp('modifie_le')->nullable();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('plan_ventes');
+        Schema::table('amazon_stores', function (Blueprint $table) {
+            //
+        });
     }
 };

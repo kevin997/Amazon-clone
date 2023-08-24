@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_entree_stocks', function (Blueprint $table) {
+        Schema::create('amazon_plan_ventes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->char('motif',255);
-            $table->timestamp('saisie_le');
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->char('name', 25);
+            $table->char('details', 255);
+            $table->double('montant');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('amazon_entree_stocks');
+        Schema::dropIfExists('amazon_plan_ventes');
     }
 };
