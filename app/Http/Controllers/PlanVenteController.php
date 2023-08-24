@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AmazonPlanVente;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,12 @@ class PlanVenteController extends Controller
      */
     public function index()
     {
-        //
+        // afficher tous les plans
+        $plan_ventes = AmazonPlanVente::all();
+
+        return view('plans_vente', [
+            'liste_plans' => $plan_ventes
+        ]);
     }
 
     /**
@@ -22,7 +28,8 @@ class PlanVenteController extends Controller
      */
     public function create()
     {
-        
+        // on affiche le formulaire de saisie
+        return view('form');
     }
 
     /**
@@ -30,14 +37,17 @@ class PlanVenteController extends Controller
      */
     public function store(Request $request)
     {
-        // on verifie qu'il s'agit de l'admistrateur
-        $role = Auth::user()->role;
+        // utilisateur logge ?
+        $user_connected = Auth::user();
 
-        if($role == "admin"){
+        // infos utilisateur pour retrouver son role
+        $user_infos = User::where('id', $user_connected->id)->first();
+
+        if($user_infos->hasRole('Admin')){    // Pour les detenteurs de compte amazon
             // validation des donnees
             $request->validate([
-                "name" => "required|unique:amazon_plan_vente,name",
-                "forfait" => "required",
+                "name" => "required|unique:amazon_plan_ventes,name",
+                "montant" => "required",
                 "details" => "required",
             ]);
 
@@ -46,14 +56,15 @@ class PlanVenteController extends Controller
                 $plan_vente = new AmazonPlanVente();
                 $plan_vente->name = $request->name;
                 $plan_vente->details = $request->details;
-                $plan_vente->forfait = $request->forfait;
+                $plan_vente->montant = $request->montant;
                 $plan_vente->created_at = now();
                 $plan_vente->save();
 
                 return response()->json([
                     "status_code" => 1,
                     "message" => "Ajout du plan de vente reussie.",
-                    "plan_vente" => $plan_vente
+                    "plan_vente" => $plan_vente,
+                    "role" => $user_infos->hasRole('Admin')
                 ], 201);
 
                 // redirection vers le formulaire de saisie
@@ -65,17 +76,23 @@ class PlanVenteController extends Controller
         }else{
             return response()->json([
                 "status_code" => 0,
-                "message" => "Impossible d'ajouter le plan de vente.",
-            ], 404);
+                "message" => "Vous devez detenir les habilitations d'administrateur pour ajouter un plan de vente.",
+                "role" => $user_infos->hasRole('Admin')
+            ], 406);
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        // on recupere les informations relative au plan de vente dont on a specifie l'id
+        $plan_vente = AmazonPlanVente::where('id', $id)->get();
+
+        return view('plan_vente', [
+            'plan_vente' => $plan_vente
+        ]);
     }
 
     /**
@@ -89,7 +106,7 @@ class PlanVenteController extends Controller
         return response()->json([
             "status_code" => 1,
             "message" => "Liste des plans de vente",
-            "store" => $plan_vente
+            "plan_vente" => $plan_vente
         ], 200);
     }
 
@@ -100,8 +117,8 @@ class PlanVenteController extends Controller
     {
         // validation des donnees
         $request->validate([
-            "name" => "required|unique:amazon_plan_vente,name",
-            "forfait" => "required",
+            "name" => "required|unique:amazon_plan_ventes,name",
+            "montant" => "required",
             "details" => "required",
         ]);
 
@@ -113,14 +130,14 @@ class PlanVenteController extends Controller
             $plan_vente->update([
                 "name" => $request->name,
                 "details" => $request->details,
-                "forfait" => $request->forfait,
+                "montant" => $request->montant,
                 "updated_at" => now()
             ]);
             
             return response()->json([
                 "status_code" => 1,
                 "message" => "Ajout du plan de vente reussie.",
-                "store" => $plan_vente
+                "plan_vente" => $plan_vente
             ], 200);
 
             // redirection vers la liste des plans de vente
@@ -128,9 +145,7 @@ class PlanVenteController extends Controller
 
         } catch (Exception $e) {
             return response()->json($e);
-        }
-
-        
+        }    
 
     }
 
@@ -143,13 +158,12 @@ class PlanVenteController extends Controller
         $plan_vente = AmazonPlanVente::where('id', $id)->first();
 
         try {
-            // on desactive le store (etat='desactive')
+            // on supprime le pln de vente
             $plan_vente->delete();
 
             return response()->json([
                 "status_code" => 1,
-                "message" => "Suppression du plan de vente ".$plan_vente->name." reussie.",
-                "store" => $plan_vente
+                "message" => "Suppression du plan de vente ".$plan_vente->name." reussie."
             ], 200);
 
         } catch (Exception $e) {

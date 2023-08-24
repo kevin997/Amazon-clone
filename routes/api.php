@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategorieProduitController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BecomeSellerController;
 use App\Http\Controllers\PlanVenteController;
@@ -154,6 +155,21 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     // editer la liste des plans de vente
     Route::get('/edit_plan_vente', [PlanVenteController::class, 'edit']);
+
+    // afficher la liste des plans de vente
+    Route::get('/show_plan_vente/{id}', [PlanVenteController::class, 'show']);
+
+    // creer une categorie de produits
+    Route::post('/create_categorie_produit', [CategorieProduitController::class, 'store']);
+
+    // mise a jour d'une categorie
+    Route::patch('/update_categorie_produit/{id}', [CategorieProduitController::class, 'update']);
+
+    // afficher la liste des categories de produit
+    Route::get('/show_categorie_produit/{id}', [CategorieProduitController::class, 'show']);
+
+    // suppression d'une categorie de produit
+    Route::delete('/delete_categorie_produit/{id}', [CategorieProduitController::class, 'delete']);
 
     // obtenir les infos de l'utilisateur connecte
     Route::get('/user', function (Request $request) {
