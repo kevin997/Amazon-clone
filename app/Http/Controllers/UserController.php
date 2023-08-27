@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\UserProfile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,35 +19,50 @@ class UserController extends Controller
         $request->validate([
             "name" => "required",
             "email" => "required|unique:users,email",
-            "password" => "required|confirmed|min:8"
+            "password" => "required|confirmed|min:8",
+            'phone' => 'required',
+            'country' => 'required',
+            'city' => 'required'
         ]);
 
         try {
             // traitement des donnees
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password, ['rounds' => 12]);
-            $user->save();
+            //-------------- 1- ENREGISTREMENT D'UN NOUVEL UTILISATEUR -----------------
+            $new_user = new User();
+            $new_user->name = $request->name;
+            $new_user->email = $request->email;
+            $new_user->password = Hash::make($request->password, ['rounds' => 12]);
+            $new_user->save();
             
             // on recupere l'id correspondant au role <<customer>>
             $role = Role::where('name', 'Customer')->first();         
             
             // on assigne le role au nouvel utilisateur
-            $user->assignRole($role->id);
+            $new_user->assignRole($role->id);
 
             // envoi du mail de verification
-            $user->sendEmailVerificationNotification();
+            $new_user->sendEmailVerificationNotification();
 
-            return response()->json([
-                "status_code" => 200,
-                "status_message" => "Compte creer avec succes. Un email de verification vous a ete envoye pour valider votre compte.",
-                "user" => $user,
-                "role" => $role
-            ]);
 
-            // redirection vers le dashboard correspondant
-                //......
+            //-------------- 2- AJOUT DES INFOS DU PROFIL -----------------
+            $user = User::find($new_user->id);
+
+            // photo de profil
+            $image = isset($request->image)? $request->image : 'no image';
+
+            $profil = new UserProfile();
+
+            $profil->phone = $request->phone;
+            $profil->country = $request->country;
+            $profil->city = $request->city;
+            $profil->street_address = $request->street_address;
+            $profil->zip = $request->zip;
+            $profil->image = $image;
+            
+            $user->user_profile()->save($profil);
+
+            // redirection vers login
+            return redirect('/login')->with(['message' => 'Compte creer avec succes. Un email de verification vous a ete envoye pour valider votre compte.'], 406);
         } catch (Exception $e) {
             return response()->json($e);
         }
@@ -56,7 +72,7 @@ class UserController extends Controller
         //validation des donnees
         $request->validate([
             "email" => "required|email|exists:users,email",
-            "password" => "required"
+            "password" => "required",
         ]);
 
         // recuperer les infos de l'utilisateur s'il existe 
@@ -77,7 +93,7 @@ class UserController extends Controller
                 ], 201);
 
                 // redirection vers le dashboard correspondant
-                //......              
+                // return redirect('/dashboard');              
 
             }else{
                 return response()->json([
@@ -105,11 +121,49 @@ class UserController extends Controller
         ]);
 
         // redirection vers index
-                //......
+        // return redirect('/home');
 
     }
 
-    public function another(){
-        
+    public function updateProfile(Request $request){
+
+        //validation des donnees
+        $request->validate([
+            'phone' => 'required',
+            'country' => 'required',
+            'city' => 'required'
+        ]);
+
+        try {
+            // traitement des donnees
+            $user = User::find($request->id);
+
+            // y a t-il une photo de profil ?
+            $image = isset($request->image)? $request->image : 'no image';
+
+            $profil = new UserProfile();
+
+            $profil->phone = $request->phone;
+            $profil->country = $request->country;
+            $profil->city = $request->city;
+            $profil->street_address = $request->street_address;
+            $profil->zip = $request->zip;
+            $profil->image = $image;
+            
+            $user->user_profile()->save($profil);
+
+            // redirection vers login
+            return redirect('/dashboard')->with(['message' => 'Profil du compte mis a jour avec succes.'], 406);
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+    public function editProfile($id){
+
+    }
+
+    public function deleteProfile($id){
+
     }
 }
