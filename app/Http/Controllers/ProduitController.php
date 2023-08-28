@@ -18,13 +18,12 @@ class ProduitController extends Controller
     public function index()
     {
         // on affiche les produits du catalogue dont le stock est superieur au seuil de recompletement
-        $produits = AmazonProduit::all()
-        ->orderBy('categorie_produit_id');
+        $produits = AmazonProduit::orderBy('designation')->get();
 
         return response()->json([
             "status_code" => 1,
             "produit" => $produits
-        ], 201);
+        ], 200);
     }
 
     /**

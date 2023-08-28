@@ -37,6 +37,12 @@ Route::post('register', [UserController::class, 'register']);
 // connexion
 Route::post('login', [UserController::class, 'login']);
 
+// afficher le catalogue de produit
+Route::get('/catalogue/produit', [ProduitController::class, 'index']);
+
+// editer un produit
+Route::get('/edit_product/{id}', [ProduitController::class, 'edit']);
+
 // Groupe de routes protegees (uniquement pour les utilisateurs authentifies)
 Route::group(['middleware' => ['auth:sanctum']], function() {
 
@@ -129,10 +135,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('/show_categorie_produit/{id}', [CategorieProduitController::class, 'show']);
 
     // suppression d'une categorie de produit
-    Route::delete('/delete_categorie_produit/{id}', [CategorieProduitController::class, 'delete']);
-
-    // afficher le catalogue de produit
-    Route::post('/catalogue/product', [ProduitController::class, 'index']);
+    Route::delete('/delete_categorie_produit/{id}', [CategorieProduitController::class, 'delete']);    
 
     // afficher le catalogue de produit
     Route::post('/catalogue/product_from_store/{id}', [ProduitController::class, 'showStoreProduct']);
@@ -144,13 +147,10 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::patch('/update_product', [ProduitController::class, 'update']);
 
     // sotie d'un produit du catalogue
-    Route::patch('/remove_product/{id}', [ProduitController::class, 'remove']);
+    Route::patch('/remove_produit/{id}', [ProduitController::class, 'remove']);
 
     // suppression du produit du catalogue par l'administrateur
-    Route::delete('/delete_product/{id}', [ProduitController::class, 'delete']);
-
-    // editer un produit
-    Route::get('/edit_product/{id}', [ProduitController::class, 'edit']);
+    Route::delete('/delete_produit/{id}', [ProduitController::class, 'delete']);    
 
     // mise a jour d'un stock
     Route::patch('/update_stock', [StockController::class, 'UpdateStock']);
