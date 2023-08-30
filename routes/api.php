@@ -43,6 +43,9 @@ Route::get('/catalogue/produit', [ProduitController::class, 'index']);
 // editer un produit
 Route::get('/edit_product/{id}', [ProduitController::class, 'edit']);
 
+// voir details d'un produit
+Route::get('/catalogue/produit/{id}', [ProduitController::class, 'show']);
+
 // Groupe de routes protegees (uniquement pour les utilisateurs authentifies)
 Route::group(['middleware' => ['auth:sanctum']], function() {
 
