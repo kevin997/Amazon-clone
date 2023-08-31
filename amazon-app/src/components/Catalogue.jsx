@@ -5,18 +5,20 @@ import axios from "axios";
 const Catalogue = () => {
 
     const [productData, setProductData] = useState([]);
+    
+    useEffect(() => { 
+        getCatalogue();
+    },[]);
 
-    //useEffect(() => { fetchData(); },[]);
-
-    const getProduits = async () => {
+    const getCatalogue = async () => {
         try {
-            const response = await axios.get("http:/127.0.0.1:8080/api/catalogue/produit");
-            console.log(response.data);
-            //setProductData(result.data.produit);
+            const response = await axios.get("http://127.0.0.1:8080/api/catalogue/produit");
+            console.log(response);
+            //setProductData(response.data.produit);
         } catch (err) {
             console.log(err);
         }
-    };
+    };    
 
 
     return(
