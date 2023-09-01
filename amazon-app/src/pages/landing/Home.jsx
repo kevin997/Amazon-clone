@@ -1,4 +1,5 @@
-import React from "react";
+import React,  { useEffect } from "react";
+
 import { IMAGES } from "../../configurations/images";
 
 function Home() {

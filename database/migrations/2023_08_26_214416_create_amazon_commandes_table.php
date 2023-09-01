@@ -14,21 +14,19 @@ return new class extends Migration
         Schema::create('amazon_commandes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('amazon_panier_id');
-            $table->timestamp('passee_le');
-            $table->char('mode_livraison', 50);
-            $table->char('adresse_livraison', 255);
-            $table->char('delais_livraison', 25);
-            $table->char('mode_paiement', 150);
-            $table->string('commentaires', 500);
-            $table->double('frais_transport');
-            $table->double('taux_tva');
-            $table->double('montant_hors_taxes');            
+            $table->foreignId('user_profile_id');
+            $table->foreignId('tva_id')->default(0.01);
+            $table->char('mode_paiement', 25);
+            $table->char('mode_livraison', 25);
+            $table->float('frais_expedition')->default(0.99);
+            $table->char('etat', 10);
+            $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('amazon_panier_id')->references('id')->on('amazon_paniers')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('user_profile_id')->references('id')->on('user_profiles')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('tva_id')->references('id')->on('amazon_tva')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
