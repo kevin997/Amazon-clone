@@ -1,0 +1,219 @@
+.header{
+    display: flex;
+    border-bottom: 2px solid #0F1111;
+    background: linear-gradient(to right, rgb(182, 188, 189), rgba(255,255,255,0), #232F3E);
+    background-color: cadetblue;
+}
+
+.nav-left,
+.nav-fill,
+.nav-right{
+    display: flex;
+    width: fit-content;
+    border: none;
+    margin: 0;
+    padding: .5%;
+    border: none /*2px solid seagreen*/;
+}
+
+.nav-left{
+    width: 370px;
+    margin-right: 0;
+}
+
+.nav-fill{
+    margin-left: 0;
+}
+
+.nav-right{
+    padding: 0 .3%;
+    border: none /*2px solid #F3A847*/;
+}
+
+.nav-left .nav-logo{
+    display: flex;
+    width: 30%;
+    margin-left: .5%;
+    border: none /*2px solid saddlebrown*/;
+}
+
+.nav-left .nav-location{
+    display: inline-block;
+    width: 250px;
+    border: none /*solid saddlebrown*/;
+}
+
+.nav-left .nav-location span#line-content-1.nav-line-1.nav-progressive-content{
+    display: inline-block;
+    width: 98%;
+    height: 25px;    
+    padding: .1%;
+    margin-top: 5%;
+    font-size: 12px;
+    font-weight: 400;
+    color: #000;
+    border: none;    
+}
+
+.nav-left .nav-location span#line-content-2.nav-line-2.nav-progressive-content{
+    display: inline-block;
+    width: 98%;
+    height: 30px;
+    padding: .1%;
+    margin: .5% 1%;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 2em;
+    color: #232F3E;
+}
+
+.logo-home-link{
+    display: inline-block;
+    width: 170px;
+    margin: 0;
+    margin-right: 1%;
+    border: none;
+    vertical-align: middle;        
+}
+
+.logo-home-link img.hide-bg{
+    display: inline-block;
+    width: 100%;
+    height: 95%;
+    margin-top: 1%;
+    font-size: 15px;
+    border: none /* solid salmon*/;
+}
+
+.nav-fill .nav-search{
+    display: inline-block;
+    width: 950px;
+    border: none /*solid saddlebrown*/;
+}
+
+.nav-search form#nav-search-bar-form{
+    display: flexbox;
+    width: 100%;
+    margin-top: 1%;
+    padding: .5% 0;
+}
+
+form#nav-search-bar-form span.nav-search-scope.nav-sprite{
+    display: flexbox;
+    width: auto;
+    margin: 0;
+    padding: .5%;
+}
+
+select.cat-produit{
+    display: inline-flex;
+    min-width: 160px;
+    width: fit-content;
+    height: 45.5px;
+    border-radius: 10px 0 0 10px;
+    border: 1px solid #FFF;
+    margin: .1% 0 .1% .1%;
+    padding: .2%;
+    line-height: 14px;
+    color: #FFF;
+    background-color: grey;
+}
+
+input#twotabsearchtextbox{
+    display: inline-flex;
+    min-width: 720px;
+    width: fit-content;
+    height: 40.2px;
+    border-radius: 0;
+    border: 1px solid slategray;
+    margin: .1% 0;
+    padding: .2%;
+    line-height: 14px;
+    color: #000;
+    background-color: #FFF;
+}
+
+input#nav-search-submit-button{
+    width: 45px;
+    height: 45px;
+    border-radius: 0 10px 10px 0;
+    border: 1px solid slategray;
+    margin: .1% .1% .1% 0;
+    padding: .2%;
+    line-height: 15px;
+    font-weight: 800;
+    color: #000;
+    background-color: #F3A847;
+    background-image: url("../../assets/research-btn.png");
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position : center;
+}
+
+.nav-right .who-is-connect,
+.nav-right .orders-history,
+.nav-right .cart-container{
+    display: inline-block;
+    width: 170px;
+    margin-top: .5%;
+    color: #FFF;
+    border: none;           
+}
+
+.nav-right .who-is-connect span,
+.nav-right .orders-history span{
+    display: inline-block;
+    width: 99%;
+    font-size: 12px;
+    text-align: center;
+}
+
+.nav-right .who-is-connect span{
+    margin-top: 5%;
+    border: 1px solid #F3A847;
+}
+
+.nav-right .who-is-connect a.signup-link,
+.nav-right .orders-history a.orders-link{
+    display: inline-flex;
+    width: fit-content;
+    padding-left: 5px;    
+    font-weight: 600;
+    font-size: 12px;
+    color: #FFF;
+}
+
+.cart-container #nav-cart-count-container,
+.cart-container #nav-cart-text-container{
+    display: inline-block;
+    width: 45%;
+    margin-top: 5%;
+    border: none /*solid #232F3E*/;
+}
+
+.cart-container #nav-cart-count-container{
+    margin-right: 2%;
+    margin-left: 2%;
+    text-align: center;
+}
+
+.cart-container #nav-cart-count-container span#nav-cart-count{
+    display: inline-block;
+    width: 90%;
+    color: #F3A847;
+    font-size: 16px;
+    font-weight: bolder;
+    line-height: 1em;
+    border: none;
+}
+
+.cart-container #nav-cart-count-container span#nav-cart-icon{
+    display: inline-block;
+    width: 90%;
+    min-height: 45px;    
+    background-image: url("../../assets/cart5.png");
+    background-repeat: no-repeat;
+    background-position : center;
+    background-size: 56px 56px;
+    border: none /*1px solid cadetblue*/;
+}

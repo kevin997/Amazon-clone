@@ -1,6 +1,7 @@
 .image{
     margin-top:-75px;
     margin-bottom: -75px;
+    border: 1px solid #0c0c0c;
   }
   .hide-bg {
       mix-blend-mode: multiply;
@@ -19,6 +20,7 @@
   }
   
   .signup img {
+    display: flex;    
   }
   
   .form-border {
