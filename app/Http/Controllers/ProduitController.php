@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AmazonProduit;
 use App\Models\AmazonProduitDetail;
 use App\Models\AmazonProduitStock;
+use App\Models\AmazonCategorieProduit;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,11 +19,11 @@ class ProduitController extends Controller
     public function index()
     {
         // on affiche les produits du catalogue dont le stock est superieur au seuil de recompletement
-        $produits = AmazonProduit::orderBy('designation')->get();
+        $produits = AmazonProduit::with('detail')->get();
 
         return response()->json([
             "status_code" => 1,
-            "produit" => $produits
+            "articles" => compact('produits')
         ], 200);
     }
 
@@ -116,11 +117,21 @@ class ProduitController extends Controller
      */
     public function show($id){
         // on recupere les informations relative au produit dont on a specifie l'id
-        $produit = AmazonProduit::where('id', $id)->first();
+        $produit = AmazonProduit::find($id);
 
-        return view('produit', [
-            'produit' => $produit
-        ]);
+        if(!$produit){
+            return response()->json([
+                "message" => "Produit inexistant."
+            ], 404);
+        }
+        
+        // on recupere le produit, des details, sa categorie ainsi que son stock
+        $produit = AmazonProduit::with('detail', 'categorie_produit', 'stock')->get();
+
+        return response()->json([
+            "status_code" => 1,
+            "produit" => $produit
+        ], 200);
     }
 
     /**
