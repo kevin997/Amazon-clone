@@ -11,6 +11,8 @@ class UserProfile extends Model
 {
     use HasFactory;
 
+    protected $table = 'user_profiles';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +24,7 @@ class UserProfile extends Model
         'city',
         'street_address',
         'zip',
+        'image',
     ];
 
     /**
