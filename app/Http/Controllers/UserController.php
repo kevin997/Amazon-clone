@@ -61,9 +61,12 @@ class UserController extends Controller
             $profil->image = $image;
 
             $user->user_profile()->save($profil);
-
+            
             // redirection vers login
-            return redirect('/login')->with(['message' => 'Compte creer avec succes. Un email de verification vous a ete envoye pour valider votre compte.'], 406);
+            return response()->json([
+                "status_code" => 0,
+                "message" => "Votre compte a ete cree avec succes. Un email de verification via l'adresse specifiee pour valider votre compte."
+            ], 406);
         } catch (Exception $e) {
             return response()->json($e);
         }

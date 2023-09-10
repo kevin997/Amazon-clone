@@ -16,7 +16,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+//use Illuminate\Foundation\Auth\EmailVerificationRequest;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,7 +30,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 // test
 Route::get('/test', function(){
     return ('test');
-
+});
 
 // s'inscrire
 Route::post('register', [UserController::class, 'register']);
