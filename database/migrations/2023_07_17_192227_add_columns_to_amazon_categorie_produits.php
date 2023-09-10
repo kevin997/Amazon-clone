@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('amazon_categorie_produits', function (Blueprint $table) {
             $table->char('name', 100);
-            $table->string('details', 5000)->nullable();
             $table->double('frais_vente_min')->default(0.30);
             $table->double('frais_vente_max')->default(0.30);
             $table->double('frais_expedition')->default(0.30);

@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('amazon_categorie_produits', function (Blueprint $table) {
             $table->id();
             $table->char('nom', 100);
-            $table->string('details', 500);
+            $table->text('details');
             $table->double('taxe_transport');
             $table->double('commission_vente');
             $table->timestamp('modifie_le')->nullable();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
