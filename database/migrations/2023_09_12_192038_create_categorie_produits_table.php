@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_categorie_produits', function (Blueprint $table) {
+        Schema::create('categorie_produits', function (Blueprint $table) {
             $table->id();
             $table->char('name', 100);
+            $table->string('details', 5000)->nullable();
             $table->double('frais_vente_min')->default(0.30);
             $table->double('frais_vente_max')->default(0.30);
             $table->double('frais_expedition')->default(0.30);
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('amazon_categorie_produits');
+        Schema::dropIfExists('categorie_produits');
     }
 };

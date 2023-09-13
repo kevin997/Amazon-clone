@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('amazon_produits', function (Blueprint $table) {
-            $table->double('prix_unitaire');
+        Schema::create('tva_grids', function (Blueprint $table) {
+            $table->id();
+            $table->float('taux')->default(1.00);
+            $table->text('description')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('amazon_produits', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tva_grids');
     }
 };

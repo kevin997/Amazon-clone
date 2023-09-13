@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class UserController extends Controller
 {
@@ -21,51 +22,31 @@ class UserController extends Controller
             "name" => "required",
             "email" => "required|unique:users,email",
             "password" => "required|confirmed|min:8",
-            'phone' => 'required',
-            'country' => 'required',
-            'city' => 'required'
         ]);
 
         try {
             // traitement des donnees
             //-------------- 1- ENREGISTREMENT D'UN NOUVEL UTILISATEUR -----------------
-            $new_user = new User();
-            $new_user->name = $request->name;
-            $new_user->email = $request->email;
-            $new_user->password = Hash::make($request->password, ['rounds' => 12]);
-            $new_user->save();
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password, ['rounds' => 12]);
+            $user->save();
 
             // on recupere l'id correspondant au role <<customer>>
             $role = Role::where('name', 'Customer')->first();
 
             // on assigne le role au nouvel utilisateur
-            $new_user->assignRole($role->id);
-
-            // envoi du mail de verification
-            $new_user->sendEmailVerificationNotification();
-
-
-            //-------------- 2- AJOUT DES INFOS DU PROFIL -----------------
-            $user = User::find($new_user->id);
-
-            // photo de profil
-            $image = isset($request->image)? $request->image : 'no image';
-
-            $profil = new UserProfile();
-
-            $profil->phone = $request->phone;
-            $profil->country = $request->country;
-            $profil->city = $request->city;
-            $profil->street_address = $request->street_address;
-            $profil->zip = $request->zip;
-            $profil->image = $image;
-
-            $user->user_profile()->save($profil);
+            $user->assignRole($role->id);
             
+            // marquer l'email comme verifie
+            $user->markEmailAsVerified();
+
             // redirection vers login
             return response()->json([
                 "status_code" => 0,
-                "message" => "Votre compte a ete cree avec succes. Un email de verification via l'adresse specifiee pour valider votre compte."
+                "message" => "Votre compte a ete cree avec succes.",
+                "user" => $user
             ], 406);
         } catch (Exception $e) {
             return response()->json($e);
@@ -109,7 +90,7 @@ class UserController extends Controller
         }else{
             return response()->json([
                 'status' => 0,
-                'message' => 'Compte inexistant'
+                'message' => 'Compte inexistant.'
             ], 404);
         }
 
@@ -118,7 +99,8 @@ class UserController extends Controller
 
     public function logout(Request $request){
         //recuperation des informations de l'utilisateur actuel connecte
-        Auth::user()->tokens()->delete();
+        $user = Auth::user()->token();
+        $user->revoke();
 
         // deconnexion reussie
         return response()->json([

@@ -11,19 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_commandes', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('user_profile_id');
-            $table->foreignId('tva_id')->default(0.01);
+            $table->foreignId('panier_id');
+            $table->foreignId('tva_grid_id')->default(0.01);
             $table->char('mode_paiement', 25);
             $table->char('mode_livraison', 25);
             $table->float('frais_expedition')->default(0.99);
             $table->char('etat', 10);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('user_profile_id')->references('id')->on('user_profiles')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('tva_id')->references('id')->on('amazon_tva')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('panier_id')->references('id')->on('paniers')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('tva_grid_id')->references('id')->on('tva_grids')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('amazon_commandes');
+        Schema::dropIfExists('orders');
     }
 };

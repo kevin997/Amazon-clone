@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_detail_produits', function (Blueprint $table) {
+        Schema::create('detail_produits', function (Blueprint $table) {
             $table->id();
             $table->foreignId('produit_id');
-            $table->longText('description');
+            $table->text('description');
             $table->char('photo_1', 255)->nullable();
             $table->char('photo_2', 255)->nullable();
             $table->char('photo_3', 255)->nullable();
             $table->char('photo_4', 255)->nullable();
             $table->char('photo_5', 255)->nullable();
             $table->char('video_explained', 255)->nullable();
-            $table->foreign('produit_id')->references('id')->on('amazon_produits')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('produit_id')->references('id')->on('produits')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('amazon_detail_produits');
+        Schema::dropIfExists('detail_produits');
     }
 };

@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_card_bank', function (Blueprint $table) {
+        Schema::create('stock_produits', function (Blueprint $table) {
             $table->id();
-            $table->char('nom_titulaire', 150);
-            $table->char('code_secret', 4);
-            $table->char('type_carte', 25);
-            $table->char('devise', 50);            
-            $table->date('date_expiration');
+            $table->foreignId('produit_id');
+            $table->double('quantite_disponible')->default(1);
+            $table->char('saisi_par', 150);
+            $table->foreign('produit_id')->references('id')->on('produits')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('amazon_card_bank');
+        Schema::dropIfExists('stock_produits');
     }
 };

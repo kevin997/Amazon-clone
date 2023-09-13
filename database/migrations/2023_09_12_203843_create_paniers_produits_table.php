@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('paniers_produits', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('panier_id');
             $table->foreignId('produit_id');
             $table->double('quantite_commandee')->default(1.00);
             $table->double('prix_vente')->default(1.00);
-            $table->foreign('panier_id')->references('id')->on('amazon_paniers')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('produit_id')->references('id')->on('amazon_produits')->cascadeOnDelete()->cascadeOnUpdate();            
+            $table->foreign('panier_id')->references('id')->on('paniers')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('produit_id')->references('id')->on('produits')->cascadeOnDelete()->cascadeOnUpdate();            
             $table->timestamps();
         });
     }

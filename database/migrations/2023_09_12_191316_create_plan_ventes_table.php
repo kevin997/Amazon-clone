@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('amazon_stores', function (Blueprint $table) {
-            $table->dateTime('cree_le')->default(now());
+        Schema::create('plan_ventes', function (Blueprint $table) {
+            $table->id();
+            $table->char('name', 25);
+            $table->char('details', 255);
+            $table->double('montant');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('amazon_stores', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('plan_ventes');
     }
 };

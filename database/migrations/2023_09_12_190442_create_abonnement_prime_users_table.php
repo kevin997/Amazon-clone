@@ -11,25 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_user_bank_accounts', function (Blueprint $table) {
+        Schema::create('abonnement_prime_users', function (Blueprint $table) {
             $table->id();
+            $table->timestamp('expires_at');
             $table->foreignId('user_id');
-            $table->char('code_bank', 5);
-            $table->char('code_guichet', 5);
-            $table->char('numero_compte', 11);
-            $table->char('cle_rib', 2);
-            $table->char('code_bic', 11);
-            $table->char('code_iban', 27);
-            $table->char('nom_titulaire', 100);
+            $table->foreignId('abonnement_prime_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('abonnement_prime_id')->references('id')->on('abonnement_primes')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('amazon_user_bank_accounts');
+        Schema::dropIfExists('abonnement_prime_users');
     }
 };

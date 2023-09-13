@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('amazon_stores', function (Blueprint $table) {
-            $table->char('pays', 100)->nullable();
-            $table->char('code_postal', 25)->nullable();
-            $table->char('etat', 15)->default('En attente');
+        Schema::create('abonnement_primes', function (Blueprint $table) {
+            $table->id();
+            $table->char('libelle', 50);
+            $table->char('formule', 25);
+            $table->double('forfait');
+            $table->char('details', 50);
+            $table->timestamps();
         });
     }
 
@@ -23,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('amazon_stores', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('abonnement_primes');
     }
 };

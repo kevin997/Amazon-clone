@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_user_credit_cards', function (Blueprint $table) {
+        Schema::create('store_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->char('numero_carte', 32);
-            $table->timestamp('date_expiration')->nullable(false);
-            $table->char('nom_proprietaire', 100);            
-            $table->char('code_cvs', 3);
-            $table->char('modele_carte', 25);
+            $table->char('nom', 100);
+            $table->char('adresse', 255);
+            $table->char('pays', 100)->nullable();
+            $table->char('code_postal', 25)->nullable();
+            $table->char('etat', 15)->default('En attente');
+            $table->char('logo', 255);
+            $table->char('site_web', 255);
+            $table->timestamp('modifie_le')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('amazon_user_credit_cards');
+        Schema::dropIfExists('store_users');
     }
 };

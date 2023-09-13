@@ -11,23 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_abonnement_users', function (Blueprint $table) {
+        Schema::create('paniers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('amazon_abonnement_prime_id');
+            $table->char('name', 255);
+            $table->char('etat', 10)->default('actif');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('amazon_abonnement_prime_id')->references('id')->on('amazon_abonnement_primes')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamp('souscris_le')->nullable();
-            $table->timestamp('expire_le')->nullable();
-            
+            $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('amazon_abonnement_users');
+        Schema::dropIfExists('paniers');
     }
 };

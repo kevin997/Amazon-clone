@@ -11,18 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_profiles', function (Blueprint $table) {
+        Schema::create('plan_ventes_users', function (Blueprint $table) {
             $table->id();
+            $table->timestamp('expires_at');
             $table->foreignId('user_id');
-            $table->char('phone', 50);
-            $table->char('country', 50);
-            $table->char('city', 50);
-            $table->char('street_address', 50);
-            $table->char('zip', 50);
-            $table->char('image', 255);
-            $table->timestamp('phone_verified_at');
-            $table->timestamps();
+            $table->foreignId('plan_vente_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('plan_vente_id')->references('id')->on('plan_ventes')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->timestamps();
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_profiles');
+        Schema::dropIfExists('plan_ventes_users');
     }
 };

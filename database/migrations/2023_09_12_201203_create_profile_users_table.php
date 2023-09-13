@@ -11,24 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amazon_stores', function (Blueprint $table) {
+        Schema::create('profile_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->char('nom', 100);
-            $table->char('adresse', 255);
-            $table->char('logo', 255);
-            $table->char('localisation', 255);
-            $table->char('site_web', 255);
+            $table->char('phone', 50);
+            $table->char('country', 50);
+            $table->char('city', 50);
+            $table->char('street_address', 50);
+            $table->char('po_box', 100);
+            $table->char('image', 255);
+            $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
-
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('amazon_stores');
+        Schema::dropIfExists('profile_users');
     }
 };

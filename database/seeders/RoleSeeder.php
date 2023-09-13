@@ -59,6 +59,18 @@ class RoleSeeder extends Seeder
             ['name' => 'UpdateProduits'],
             ['name' => 'DeleteProduits'],
 
+            //Manage Detail Produit permission
+            ['name' => 'CreateDetailsProduits'],
+            ['name' => 'ReadDetailsProduits'],
+            ['name' => 'UpdateDetailsProduits'],
+            ['name' => 'DeleteDetailsProduits'],
+
+            //Manage Stock Produit permission
+            ['name' => 'CreateStocksProduits'],
+            ['name' => 'ReadStocksProduits'],
+            ['name' => 'UpdateStocksProduits'],
+            ['name' => 'DeleteStocksProduits'],
+
             //Manage Shopping cart permission
             ['name' => 'CreateShoppingCart'],
             ['name' => 'ReadShoppingCart'],
@@ -76,12 +88,6 @@ class RoleSeeder extends Seeder
             ['name' => 'ReadSubscription'],
             ['name' => 'UpdateSubscription'],
             ['name' => 'DeleteSubscription'],
-
-            //Manage Stocks permission
-            ['name' => 'CreateStocks'],
-            ['name' => 'ReadStocks'],
-            ['name' => 'UpdateStocks'],
-            ['name' => 'DeleteStocks'],
 
             //Manage Bank account permission
             ['name' => 'CreateBankAccount'],
@@ -124,6 +130,7 @@ class RoleSeeder extends Seeder
             'DeleteShoppingCart',            
             'ReadStores',
             'ReadProduits',
+            'ReadDetailsProduits',
             'ReadCategorieProduit',
             'ReadAbonnementPrime',            
         ], $role);
@@ -133,7 +140,8 @@ class RoleSeeder extends Seeder
         $this->assignCustomerPermissions([
             'ReadStores',
             'ReadCategorieProduit',
-            'ReadProduits',            
+            'ReadProduits',
+            'ReadDetailsProduits',            
             'CreateShoppingCart',
             'ReadShoppingCart',
             'UpdateShoppingCart',
@@ -175,12 +183,15 @@ class RoleSeeder extends Seeder
             'CreateProduits',
             'ReadProduits',
             'UpdateProduits',
+            'CreateDetailsProduits',
+            'ReadDetailsProduits',
+            'UpdateDetailsProduits',
             'CreatePlanVente',
             'ReadPlanVente',
             'UpdatePlanVente',
-            'CreateStocks',
-            'ReadStocks',
-            'UpdateStocks',
+            'CreateStocksProduits',
+            'ReadStocksProduits',
+            'UpdateStocksProduits',
             'CreateBankAccount',
             'ReadBankAccount',
             'UpdateBankAccount',
