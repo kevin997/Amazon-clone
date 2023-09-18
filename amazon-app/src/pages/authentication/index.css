@@ -1,12 +1,14 @@
 .image{
     margin-top:-75px;
     margin-bottom: -75px;
+    /*border: 1px solid #0c0c0c;*/
+    border: none;
   }
   .hide-bg {
       mix-blend-mode: multiply;
       filter: contrast(1);
   }
-  .signup {
+  .signup, .login {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -14,11 +16,16 @@
       padding: 14px 18px;
   }
   
-  .signup header {
+  .signup header, .login header {
       font-size: 25px;
   }
+
+  .login header{
+    margin-bottom: 5%;
+  }
   
-  .signup img {
+  .signup img, .login img {
+    display: flex;    
   }
   
   .form-border {
@@ -31,17 +38,45 @@
       padding-top: -55%;
   }
   
-  form {
+  form, .login-form {
       display: flex;
       flex-direction: column;
   }
   
-  form label {
+  form label, .login-form label {
       padding-top: 12px;
       font-weight: 500;
   }
+
+  .special-label {
+    display: block;
+  }
+
+  .special-label .rememberMe{
+    height: 13px;
+    width: 13px;
+    vertical-align: top;
+    position: relative;
+    bottom: -3px;
+  }
+
+  .special-label .a-icon, .a-link-emphasis:after {
+    background-image: url(https://m.media-amazon.com/images/S/sash/mPGmT0r6IeTyIee.png);
+    -webkit-background-size: 400px 750px;
+    background-size: 400px 750px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.special-label .a-checkbox-label, .a-radio-label {
+  position: relative;
+  padding-left: 5px;
+  text-indent: 0;
+  display: inline-block;
+}
   
-  form input {
+  form input, .login-form input {
       border: 1px solid #a6a6a6;
       border-top-color: #949494;
       border-radius: 3px;
@@ -54,7 +89,7 @@
       line-height: normal;
   }
   
-  button {
+  button, input#btnSubmit {
       margin-top: 12px;
       padding: 10px;
       background: #f0c14b;
@@ -91,8 +126,9 @@
   .divider{
     display: block;
     width: 100%;
-    height: 10px;
-    background: linear-gradient(to right, #fff, rgba(255,255,255,0), #fff);
+    height: 1px;
+    background-color: #949494;
+    /*background: linear-gradient(to right, #fff, rgba(255,255,255,0), #fff);*/
     content: "";
   }
   
@@ -100,3 +136,6 @@
       color: #e11d48;
       font-size: 15px;
   }
+
+  /* MES STYLES */
+  
