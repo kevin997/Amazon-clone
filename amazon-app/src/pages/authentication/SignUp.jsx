@@ -52,7 +52,7 @@ function SignUp() {
                                 {errors.name?.message}
                             </p>
                         )}
-                        <label htmlFor="name">Mobile nuber or email</label>
+                        <label htmlFor="name">Mobile number or email</label>
                         <input
                             type="text"
                             name="email"
@@ -71,7 +71,7 @@ function SignUp() {
                         <input
                             type="password"
                             name="password"
-                            placeholder="At least 6 caharacters"
+                            placeholder="At least 6 characters"
                             {...register(
                                 "password",
                                 { required: "password is required" },

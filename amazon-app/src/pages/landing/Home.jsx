@@ -1,12 +1,22 @@
 //on commence par importer React ainsi que les hocks utiles
-import React,  { useEffect } from "react";
-import Catalogue from "../../components/Catalogue.jsx";
+import React,  { useEffect, useState } from "react";
 
 import "./landing.css";
 
 import { IMAGES } from "../../configurations/images";
 
+function getDate() {
+    const today = new Date();
+    //const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    //const date = today.getDate();
+    //return `${month}/${date}/${year}`;
+    return `${year}`;
+  }
+
 function Home() {
+    const [currentDate, setCurrentDate] = useState(getDate());
+
     return (
         <div className="page">
             <div className="header">            
@@ -60,7 +70,14 @@ function Home() {
             </div>
 
             <div className="main">
-            <Catalogue />
+                
+            </div>
+            <div className="footer">
+                <div className="copyright">
+                    <p>
+                        Copyright © { currentDate } - clone-amazon
+                    </p>
+                </div>
             </div>
         </div>
         

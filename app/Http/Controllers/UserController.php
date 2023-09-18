@@ -12,8 +12,17 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function index(){
 
-    //
+        $users = User::all();
+
+        return response()->json([
+            "results" => $users
+        ], 200);
+
+    }
+
+    // to subscribe
     public function register(Request $request){
 
         //validation des donnees
@@ -21,50 +30,44 @@ class UserController extends Controller
             "name" => "required",
             "email" => "required|unique:users,email",
             "password" => "required|confirmed|min:8",
-            'phone' => 'required',
-            'country' => 'required',
-            'city' => 'required'
         ]);
 
         try {
             // traitement des donnees
             //-------------- 1- ENREGISTREMENT D'UN NOUVEL UTILISATEUR -----------------
-            $new_user = new User();
-            $new_user->name = $request->name;
-            $new_user->email = $request->email;
-            $new_user->password = Hash::make($request->password, ['rounds' => 12]);
-            $new_user->save();
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password, ['rounds' => 12]);
+            $user->save();
 
             // on recupere l'id correspondant au role <<customer>>
             $role = Role::where('name', 'Customer')->first();
 
             // on assigne le role au nouvel utilisateur
-            $new_user->assignRole($role->id);
-
-            // envoi du mail de verification
-            $new_user->sendEmailVerificationNotification();
-
+            $user->assignRole($role->id);
 
             //-------------- 2- AJOUT DES INFOS DU PROFIL -----------------
-            $user = User::find($new_user->id);
+            //$user = User::find($new_user->id);
 
             // photo de profil
-            $image = isset($request->image)? $request->image : 'no image';
+            //$image = isset($request->image)? $request->image : 'no image';
 
-            $profil = new UserProfile();
+            //$profil = new UserProfile();
 
-            $profil->phone = $request->phone;
-            $profil->country = $request->country;
-            $profil->city = $request->city;
-            $profil->street_address = $request->street_address;
-            $profil->zip = $request->zip;
-            $profil->image = $image;
+            //$profil->phone = $request->phone;
+            //$profil->country = $request->country;
+            //$profil->city = $request->city;
+            //$profil->street_address = $request->street_address;
+            //$profil->zip = $request->zip;
+            //$profil->image = $image;
 
-            $user->user_profile()->save($profil);
+            //$user->user_profile()->save($profil);
             
             // redirection vers login
             return response()->json([
                 "status_code" => 0,
+                "user" => $user,
                 "message" => "Votre compte a ete cree avec succes. Un email de verification via l'adresse specifiee pour valider votre compte."
             ], 406);
         } catch (Exception $e) {

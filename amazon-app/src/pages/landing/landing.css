@@ -1,4 +1,4 @@
-.header{
+.header, .footer{
     display: flex;
     border-bottom: 2px solid #0F1111;
     background: linear-gradient(to right, rgb(182, 188, 189), rgba(255,255,255,0), #232F3E);
@@ -216,4 +216,287 @@ input#nav-search-submit-button{
     background-position : center;
     background-size: 56px 56px;
     border: none /*1px solid cadetblue*/;
+}
+
+form input {
+    border: 1px solid #a6a6a6;
+    border-top-color: #949494;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5),
+        0 1px 0 rgba(0, 0, 0, 0.07) inset;
+    outline: 0;
+    background-color: #fff;
+    height: 31px;
+    padding: 3px 7px;
+    line-height: normal;
+}
+
+button, input#btnSubmit {
+    display: inline-block;
+    width: 99%;
+    height: 40px;
+    margin-top: 12px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background: #f0c14b;
+    border: 1px solid #e9ecef;
+    cursor: pointer;    
+    text-align: center;
+    text-decoration: none !important;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+input#btnSubmit:hover {
+    background-color: #a88734 #9c7e31 #846a29;
+    border: 1px solid #e9ecef;
+}
+
+.register{
+  font-size:12px;
+  line-height:1.5;
+}
+
+ a{
+  text-decoration: none;
+  color: #0066c0;
+}
+
+.divider{
+  display: inline-flex;
+  width: 50%;
+  margin-bottom: 4%;
+  margin-top: 4%;
+  height: 0;
+  background-color: #fff;
+  /*background: linear-gradient(to right, #fff, rgba(255,255,255,0), #fff);*/
+}
+
+.text-error{
+    color: #e11d48;
+    font-size: 15px;
+}
+
+/* New style for admin panel */
+.main-container{
+    display: inline-block;
+    width: 90%;
+    border: 1px solid #0F1111;    
+    background-color: #e9ecef;
+    margin: 2% 5%;
+    padding: .5%;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    font-family: "Amazon Ember",Arial,sans-serif;
+}
+
+.main-container h1{
+    display: inline-block;
+    width: 99%;
+    padding: 1% .5%;
+    margin-bottom: 2%;
+    text-align: center;
+    color: #232F3E;
+    border-bottom: 2px solid #949494;
+}
+
+.main-container .form-container{
+    display: inline-block;
+    width: 30%;
+    padding: 1%;
+    border: 2px solid #232F3E;
+    vertical-align: top;
+}
+
+.main-container .table-container{
+    display: inline-block;
+    width: 58%;
+    padding: 1%;
+    margin-left: 5.5%;
+    border: 2px solid #232F3E;
+    vertical-align: top;
+}
+
+.form-container form{
+    display: inline-flex;
+    width: 99%;
+    margin: .5%;
+    padding: 1%;
+}
+
+.table-container .tab-categorie,
+.table-container .tab-plan,
+.table-container .tab-abonnement,
+.table-container .tab-tva,
+.table-container .tab-store,
+.table-container .tab-produit {
+    display: inline-flex;
+    width: 99%;
+    margin: .5%;
+    padding: .5%;
+    vertical-align: top;
+    border-collapse: collapse;
+}
+
+.form-container form label {
+    display: inline-block;
+    width: 90%;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-container form input {
+    display: inline-block;
+    width: 95%;
+}
+
+.form-container form select {
+    display: inline-block;
+    width: 98%;
+    height: 40px;
+    border: 1px solid #767676;
+}
+
+.form-container form input[type='number'] {
+    width: 30%;
+    text-align: right;
+    padding: 0;
+}
+
+.form-container form input[type='file'] {
+    width: fit-content;
+    padding: 1%;
+    padding-top: 2%;
+    padding-bottom: .5%;
+    margin-top: 2%;
+    background-color: #767676;
+}
+
+.form-container form input[name='frais_vente_max'] {
+    margin-left: 37.3%;
+}
+
+.form-container form textarea {
+    display: inline-block;
+    padding: 1%;
+    width: 97%;
+    height: 150px;
+    resize: none;
+}
+
+.tab-categorie thead,
+.tab-plan thead,
+.tab-abonnement thead,
+.tab-tva thead,
+.tab-store thead,
+.tab-produit thead {
+    background-color: #a6a6a6;    
+}
+
+.tab-categorie thead tr th,
+.tab-plan thead tr th,
+.tab-abonnement thead tr th,
+.tab-tva thead tr th,
+.tab-store thead tr th,
+.tab-produit thead tr th {
+    border-bottom: 2px solid #232F3E;
+}
+
+.tab-categorie thead tr th:nth-child(1) {
+    width: 150px;    
+}
+
+.tab-plan thead tr th:nth-child(1),
+.tab-abonnement thead tr th:nth-child(1),
+.tab-produit thead tr th:nth-child(1) {
+    width: 90px;    
+}
+
+.tab-abonnement thead tr th:nth-child(1),
+.tab-tva thead tr th:nth-child(1),
+.tab-store thead tr th:nth-child(1) {
+    width: 100px;    
+}
+
+.tab-categorie thead tr th:nth-child(2),
+.tab-plan thead tr th:nth-child(2) {
+    width: 280px;    
+}
+
+.tab-tva thead tr th:nth-child(2) {
+    width: 80px;    
+}
+
+.tab-abonnement thead tr th:nth-child(2),
+.tab-store thead tr th:nth-child(2) {
+    width: 250px;    
+}
+
+.tab-produit thead tr th:nth-child(2) {
+    width: 400px;    
+}
+
+.tab-categorie thead tr th:nth-child(3),
+.tab-plan thead tr th:nth-child(3) {
+    width: 400px;    
+}
+
+.tab-store thead tr th:nth-child(3) {
+    width: 200px;    
+}
+
+.tab-produit thead tr th:nth-child(3) {
+    width: 100px;
+}
+
+.tab-tva thead tr th:nth-child(3) {
+    width: 650px;    
+}
+
+.tab-abonnement thead tr th:nth-child(3) {
+    width: 370px;    
+}
+
+.tab-categorie thead tr th:nth-child(4),
+.tab-tva thead tr th:nth-child(4) {
+    width: 150px;    
+}
+
+.tab-produit thead tr th:nth-child(4) {
+    width: 120px;    
+}
+
+.tab-abonnement thead tr th:nth-child(4) {
+    width: 95px;    
+}
+
+.tab-plan thead tr th:nth-child(4) {
+    width: 120px;    
+}
+
+.tab-store thead tr th:nth-child(4) {
+    width: 300px;
+}
+
+.tab-plan thead tr th:nth-child(5),
+.tab-store thead tr th:nth-child(5) {
+    width: 150px;    
+}
+
+.tab-produit thead tr th:nth-child(5) {
+    width: 120px;    
+}
+
+.tab-abonnement thead tr th:nth-child(5) {
+    width: 80px;    
+}
+
+.tab-abonnement thead tr th:nth-child(6) {
+    width: 80px;    
+}
+
+.tab-produit thead tr th:nth-child(6) {
+    width: 180px;    
 }

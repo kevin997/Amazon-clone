@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('amazon_stores', function (Blueprint $table) {
-            $table->char('pays', 100)->nullable();
-            $table->char('code_postal', 25)->nullable();
-            $table->char('etat', 15)->default('En attente');
+        Schema::table('produits', function (Blueprint $table) {
+            $table->double('prix_unitaire');
         });
     }
 
@@ -23,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('amazon_stores', function (Blueprint $table) {
+        Schema::table('produits', function (Blueprint $table) {
             //
         });
     }
