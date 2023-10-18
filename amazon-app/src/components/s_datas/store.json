@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "user_id": 2,
+        "nom": "Ets Electroniks",
+        "adresse": "7632 rue des accacias",
+        "pays": "cameroun",
+        "code_postal": "3021 douala",
+        "etat": "pending",
+        "logo": "",
+        "site_web": "",
+        "modifie_le": ""
+    },
+    {
+        "id": 2,
+        "user_id": 3,
+        "nom": "Ets Nougima",
+        "adresse": "332 rue des arcades",
+        "pays": "cameroun",
+        "code_postal": "6091 douala",
+        "etat": "pending",
+        "logo": "",
+        "site_web": "",
+        "modifie_le": ""
+    },
+    {
+        "id": 3,
+        "user_id": 3,
+        "nom": "Ste Stell",
+        "adresse": "3062 rue des hibiscus",
+        "pays": "nigeria",
+        "code_postal": "1021 abuja",
+        "etat": "ouvert",
+        "logo": "",
+        "site_web": "",
+        "modifie_le": ""
+    },
+    {
+        "id": 4,
+        "user_id": 4,
+        "nom": "jni technology",
+        "adresse": "3062 rue des hibiscus",
+        "pays": "nigeria",
+        "code_postal": "1021 abuja",
+        "etat": "ouvert",
+        "logo": "",
+        "site_web": "https://www.jni-technology.com",
+        "modifie_le": ""
+    },
+    {
+        "id": 5,
+        "user_id": 5,
+        "nom": "it services",
+        "adresse": "4015 avenue de la reunification",
+        "pays": "cameroun",
+        "code_postal": "75 yaounde",
+        "etat": "ouvert",
+        "logo": "",
+        "site_web": "http://www.its-nh.com",
+        "modifie_le": ""
+    },
+    {
+        "id": 6,
+        "user_id": 6,
+        "nom": "Hitech Electronic's",
+        "adresse": "9015 avenue jean paul II",
+        "pays": "cameroun",
+        "code_postal": "675 douala",
+        "etat": "ouvert",
+        "logo": "",
+        "site_web": "www.facebook.com/HitechElectronics237",
+        "modifie_le": ""
+    }
+]

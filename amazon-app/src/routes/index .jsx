@@ -9,6 +9,9 @@ import Tva from "../pages/others/grid_tva";
 import Store from "../pages/others/store";
 import Produit from "../pages/others/produit";
 import User from "../pages/others/user";
+import UserView from "../components/user_view";
+import UserEdit from "../components/user_edit";
+import Product from "../components/view_product";
 
 const router = createBrowserRouter([
     {
@@ -44,12 +47,20 @@ const router = createBrowserRouter([
         element: <Store/>
     },
     {
-        path:"/Produit",
-        element: <Produit/>
-    },
-    {
         path:"/User",
         element: <User/>
+    },
+    {
+        path:"/user_view/:id",
+        element: <UserView/>
+    },
+    {
+        path:"/user_edit/:id",
+        element: <UserEdit/>
+    },
+    {
+        path:"/view_product/:id",
+        element: <Product/>
     }
 ])
 

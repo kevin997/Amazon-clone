@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
-use App\Models\UserProfile;
+use DateTime;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +14,11 @@ class UserController extends Controller
 {
     public function index(){
 
-        $users = User::all();
+        $users =  User::all();
 
         return response()->json([
+            "status_code" => 0,
+            "message" => "ok",
             "results" => $users
         ], 200);
 
@@ -46,36 +48,20 @@ class UserController extends Controller
 
             // on assigne le role au nouvel utilisateur
             $user->assignRole($role->id);
-
-            //-------------- 2- AJOUT DES INFOS DU PROFIL -----------------
-            //$user = User::find($new_user->id);
-
-            // photo de profil
-            //$image = isset($request->image)? $request->image : 'no image';
-
-            //$profil = new UserProfile();
-
-            //$profil->phone = $request->phone;
-            //$profil->country = $request->country;
-            //$profil->city = $request->city;
-            //$profil->street_address = $request->street_address;
-            //$profil->zip = $request->zip;
-            //$profil->image = $image;
-
-            //$user->user_profile()->save($profil);
             
             // redirection vers login
             return response()->json([
                 "status_code" => 0,
                 "user" => $user,
                 "message" => "Votre compte a ete cree avec succes. Un email de verification via l'adresse specifiee pour valider votre compte."
-            ], 406);
+            ], 200);
         } catch (Exception $e) {
             return response()->json($e);
         }
     }
 
     public function login(Request $request){
+
         //validation des donnees
         $request->validate([
             "email" => "required|email|exists:users,email",
@@ -87,28 +73,30 @@ class UserController extends Controller
 
         if($user){
             if(Hash::check($request->password, $user->password)){
-                // creer un jeton/token
-                $token = $user->createToken("auth_token")->plainTextToken;
+                $expires_at = new DateTime();
+                $expires_at->modify("+120 minute");
 
+                //$expires_at = date("Y-m-d H:i:s", time()+(3*3600));
+
+                // creer un jeton/token                
+                $token = $user->createToken("auth_token", ['*'], $expires_at)->plainTextToken;
+                
                 // connexion reussie
                 return response()->json([
                     "status_code" => 1,
                     "message" => "Connexion reussie",
                     "user" => $user,
                     "role_name" => $user->getRoleNames(),
-                    "access_token" => $token
+                    "access_token" => $token,
+                    "expires_token" => $expires_at
                 ], 201);
-
-                // redirection vers le dashboard correspondant
-                // return redirect('/dashboard');
 
             }else{
                 return response()->json([
                     'status_code' => 0,
-                    'status_message' => 'Mot de passe incorrect'
+                    'message' => 'Mot de passe incorrect'
                 ], 401);
             }
-
         }else{
             return response()->json([
                 'status' => 0,
@@ -119,59 +107,133 @@ class UserController extends Controller
     }
 
 
-    public function logout(Request $request){
-        //recuperation des informations de l'utilisateur actuel connecte
-        Auth::user()->tokens()->delete();
+    public function logout(){
 
-        // deconnexion reussie
-        return response()->json([
-            "status_code" => 1,
-            "message" => "Deconnexion reussie",
-        ]);
+        //on recupere l'utilisateur connecte
+        $user = Auth::user();
 
-        // redirection vers index
-        // return redirect('/home');
+        if(!$user){
+            return response()->json([
+                "status_code" => 0,
+                "errors" => 401,
+                "message" => "utilisateur non trouve"
+            ]);
+        }else{
+            try {
+                $user->tokens()->delete();
 
+                // deconnexion reussie
+            return response()->json([
+                "status_code" => 1,
+                "errors" => 200,
+                "message" => "Deconnexion reussie",
+                "user" => $user
+            ]);
+            } catch (Exception $e) {
+                return response()->json($e);
+            }
+        }
     }
 
-    public function updateProfile(Request $request){
+    public function update(Request $request, $id){
 
         //validation des donnees
         $request->validate([
-            'phone' => 'required',
-            'country' => 'required',
-            'city' => 'required'
+            'name' => 'required',
+            'email' => 'required',
         ]);
 
         try {
             // traitement des donnees
-            $user = User::find($request->id);
+            $user = User::find($id);
 
-            // y a t-il une photo de profil ?
-            $image = isset($request->image)? $request->image : 'no image';
+            if(!$user){
+                return response()->json([
+                    "status_code" => 0,
+                    "message" => "Utilisateur inexistant.",
+                ], 404);
+            }
 
-            $profil = new UserProfile();
+            $user->update([
+                "name" => $request->name,
+                "email" => $request->email,
+                "updated_at" => now()
+            ]);            
 
-            $profil->phone = $request->phone;
-            $profil->country = $request->country;
-            $profil->city = $request->city;
-            $profil->street_address = $request->street_address;
-            $profil->zip = $request->zip;
-            $profil->image = $image;
-
-            $user->user_profile()->save($profil);
-
-            // redirection vers login
-            return redirect('/dashboard')->with(['message' => 'Profil du compte mis a jour avec succes.'], 406);
+            return response()->json([
+                "status_code" => 1,
+                "message" => "Utilisateur mis a jour avec succes."
+            ], 200);
         } catch (Exception $e) {
             return response()->json($e);
         }
     }
 
-    public function editProfile($id){
+    public function show($id){
 
+        try {
+            // traitement des donnees
+            $user = User::find($id);
+
+            if(!$user){
+                return response()->json([
+                    "status_code" => 0,
+                    "message" => "Utilisateur inexistant.",
+                ], 404);
+            }
+
+            return response()->json([
+                "status_code" => 1,
+                "user" => $user
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
     }
 
-    public function deleteProfile($id){
+    public function edit($id){
+
+        try {
+            // traitement des donnees
+            $user = User::find($id);
+
+            if(!$user){
+                return response()->json([
+                    "status_code" => 0,
+                    "message" => "Utilisateur inexistant.",
+                ], 404);
+            }
+
+            return response()->json([
+                "status_code" => 1,
+                "user" => $user
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+    public function destroy($id){
+
+        try {
+            // traitement des donnees
+            $user = User::find($id);
+
+            if(!$user){
+                return response()->json([
+                    "status_code" => 0,
+                    "message" => "Utilisateur inexistant.",
+                ], 404);
+            }
+
+            $user->delete();
+
+            return response()->json([
+                "status_code" => 1,
+                "message" => "Utilisateur supprime avec succes.",
+            ]);
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
     }
 }

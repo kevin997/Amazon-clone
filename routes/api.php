@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\BecomeSellerController;
+//use App\Http\Controllers\BecomeSellerController;
 use App\Http\Controllers\CategorieProduitController;
-use App\Http\Controllers\DetailProduitController;
+//use App\Http\Controllers\DetailProduitController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\PlanVenteController;
 use App\Http\Controllers\ProduitController;
-use App\Http\Controllers\StockController;
+//use App\Http\Controllers\StockController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\TvaController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserProfileController;
-use App\Models\UserProfile;
+//use App\Http\Controllers\UserProfileController;
+//use App\Models\UserProfile;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 use Illuminate\Http\Request;
@@ -33,8 +33,26 @@ Route::get('/test', function(){
     return ('test');
 });
 
+// inscription
+Route::post('/register', [UserController::class, 'register']);
+
+// connexion
+Route::post('/login', [UserController::class, 'login']);
+
 // get users
 Route::get('/users', [UserController::class, 'index']);
+
+// show user
+Route::get('/view_user/{id}', [UserController::class, 'show']);
+
+// edit user
+Route::get('/edit_user/{id}', [UserController::class, 'edit']);
+
+// delete user
+Route::delete('/delete_user/{id}', [UserController::class, 'destroy']);
+
+// update user
+Route::patch('/update_user/{id}', [UserController::class, 'update']);
 
 // Protection de certaines routes
 Route::get('/profile', function () {
@@ -54,10 +72,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // inscription
-Route::post('register', [UserController::class, 'register']);
+//Route::post('register', [UserController::class, 'register']);
 
-// connexion
-Route::post('login', [UserController::class, 'login']);
+
 
 // afficher tout le catalogue des produits
 Route::get('/catalogue/produit', [ProduitController::class, 'index']);
@@ -72,25 +89,22 @@ Route::get('/catalogue/produit/{id}', [ProduitController::class, 'show']);
 Route::group(['middleware' => ['auth:sanctum']], function() {
 
     // deconnexion de l'utilisateur
-    Route::post('logout',   [UserController::class, 'logout']);
+    Route::post('/logout',   [UserController::class, 'logout']);
 
     // devenir un vendeur
-    Route::post('/become_seller', [BecomeSellerController::class, 'createStore']);
+    //Route::post('/become_seller', [BecomeSellerController::class, 'createStore']);
 
     // creer un profil
-    Route::post('/create_profil', [UserProfileController::class, 'store']);
+    //Route::post('/create_profil', [UserProfileController::class, 'store']);
 
     // afficher les infos du profil
-    Route::get('/profil', [UserProfileController::class, 'show']);
-
-    // mise a jour du profil
-    Route::patch('/update_profil/{id}', [UserProfileController::class, 'update']);
+    //Route::get('/profil', [UserProfileControalleerProfileController::class, 'update']);
 
     // detail du profil
-    Route::get('/edit_profil/{id}', [UserProfileController::class, 'edit']);
+    //Route::get('/edit_profil/{id}', [UserProfileController::class, 'edit']);
 
     // delete profil
-    Route::delete('/delete_profil/{id}', [UserProfileController::class, 'delete']);    
+    //Route::delete('/delete_profil/{id}', [UserProfileController::class, 'delete']);    
 
     // creer un taux de tva
     Route::post('/create_tva', [TvaController::class, 'store']);
@@ -126,7 +140,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::delete('/delete_store/{id}', [StoreController::class, 'delete']);     //status = "deleted"
 
     // editer la liste des stores pour vendeur
-    Route::get('/edit_store/{id}', [StoreController::class, 'edit']);
+    Route::get('/edit_store/{id}', [StoreContralleeoller::class, 'edit']);
 
     // creer un plan de vente
     Route::post('/create_plan_vente', [PlanVenteController::class, 'store']);
@@ -189,7 +203,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::patch('/delete_produit/{id}', [ProduitController::class, 'delete']);    // etat = "definitivement supprime"
 
     // mise a jour d'un stock
-    Route::patch('/update_stock/{id}', [StockController::class, 'Update']);
+    //Route::patch('/update_stock/{id}', [StockalleeController::class, 'Update']);
 
     // creation du panier d'achats
     Route::post('/add_to_cart', [PanierController::class, 'AjouterLignePanier']);

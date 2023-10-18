@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./index.css";
 
-import { IMAGES } from "../../configurations/images";
+import { IMAGES } from "../../configurations/amazon_images";
 
 function SignUp() {
     const {
@@ -32,7 +32,7 @@ function SignUp() {
 
     return (
         <div className="signup">
-            <img className="hide-bg image" src={IMAGES.amazonLogo} alt="logo" />
+            <img className="hide-bg image" src={IMAGES.amazonLogoForPages} alt="logo" />
             <div className="form-border">
                 <header>Create account</header>
                 <div className="form">
@@ -109,7 +109,7 @@ function SignUp() {
                         {watch("password_repeat") !== watch("password") &&
                         getValues("password_repeat") ? (
                             <p className="text-error">password not match</p>
-                        ) : null}
+                        ) : null}<br/>
                         <button>Continue</button>
                     </form>
                     <p className="legal-info">

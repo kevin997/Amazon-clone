@@ -1,0 +1,138 @@
+
+[
+    {
+        "id": 1,
+        "name": "Automobile",
+        "conditions": "Neuf, reconditionné certifié, occasion, de collection"
+    },
+    {
+        "id": 2,
+        "name": "Produits pour bebe",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 3,
+        "name": "Book Music Video DVD",
+        "conditions": "Neuf, reconditionné, occasion, de collection"
+    },
+    {
+        "id": 4,
+        "name": "Informatique",
+        "conditions": "Neuf, reconditionné, occasion"
+    },
+    {
+        "id": 5,
+        "name": "Jeux vidéo et Consoles",
+        "conditions": "Neuf, reconditionné, occasion"
+    },
+    {
+        "id": 6,
+        "name": "Produits électroniques grand public",
+        "conditions": "Neuf, reconditionné certifié, occasion"
+    },
+    {
+        "id": 7,
+        "name": "DIY et Outils",
+        "conditions": "Neuf, reconditionné certifié, occasion, de collection"
+    },
+    {
+        "id": 8,
+        "name": "Jardin & Extérieur",
+        "conditions": "Neuf, reconditionné certifié, occasion"
+    },
+    {
+        "id": 9,
+        "name": "Cuisine & Maison",
+        "conditions": "Neuf, reconditionné certifié, occasion"
+    },
+    {
+        "id": 10,
+        "name": "Gros électroménager",
+        "conditions": "Neuf, reconditionné certifié, occasion"
+    },
+    {
+        "id": 11,
+        "name": "Luminaires",
+        "conditions": "Neuf, reconditionné certifié, occasion. Ampoules neuves uniquement."
+    },
+    {
+        "id": 12,
+        "name": "Instruments de musique",
+        "conditions": "Neuf, reconditionné certifié, occasion"
+    },
+    {
+        "id": 13,
+        "name": "Fournitures de bureau",
+        "conditions": "Neuf, reconditionné certifié, occasion, de collection"
+    },
+    {
+        "id": 14,
+        "name": "Articles pour animaux de compagnie",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 15,
+        "name": "Chaussures et Accessoires",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 16,
+        "name": "Logiciels et Jeux PC",
+        "conditions": "Neuf, reconditionné, occasion, de collection"
+    },
+    {
+        "id": 17,
+        "name": "Articles de sport",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 18,
+        "name": "Jeux et Jouets",
+        "conditions": "Neuf, reconditionné, occasion, de collection"
+    },
+    {
+        "id": 19,
+        "name": "Épicerie",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 20,
+        "name": "Bijoux",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 21,
+        "name": "Montres",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 22,
+        "name": "Montres",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 23,
+        "name": "Vêtements",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 24,
+        "name": "Bières, Vins et Spiritueux",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 25,
+        "name": "Beauté",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 26,
+        "name": "Santé et Soins",
+        "conditions": "Neuf uniquement"
+    },
+    {
+        "id": 27,
+        "name": "Appareils de soins personnels",
+        "conditions": "Neuf uniquement"
+    }
+]

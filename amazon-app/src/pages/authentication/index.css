@@ -17,7 +17,8 @@
   }
   
   .signup header, .login header {
-      font-size: 25px;
+      font-size: 2em;
+      font-weight: 500;
   }
 
   .login header{
@@ -42,11 +43,16 @@
       display: flex;
       flex-direction: column;
   }
-  
-  form label, .login-form label {
-      padding-top: 12px;
-      font-weight: 500;
-  }
+
+  form label {
+    display: inline-block;
+    width: 60%;
+    margin-left: 1%;
+    margin-bottom: .5%;
+    padding-top: 12px;
+    color: #000;
+    font-weight: bolder;
+}
 
   .special-label {
     display: block;
@@ -77,36 +83,51 @@
 }
   
   form input, .login-form input {
-      border: 1px solid #a6a6a6;
-      border-top-color: #949494;
-      border-radius: 3px;
-      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5),
-          0 1px 0 rgba(0, 0, 0, 0.07) inset;
-      outline: 0;
-      background-color: #fff;
-      height: 31px;
-      padding: 3px 7px;
-      line-height: normal;
+    display: inline-block;
+    width: 99%;
+    height: 40px;
+    border: 1px solid #a6a6a6;
+    border-top-color: #949494;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5),
+        0 1px 0 rgba(0, 0, 0, 0.07) inset;
+    outline: 0;
+    background-color: #fff;
+    height: 31px;
+    padding: 3px 7px;
+    line-height: normal;
   }
   
-  button, input#btnSubmit {
-      margin-top: 12px;
-      padding: 10px;
-      background: #f0c14b;
-      border-color: #a88734 #9c7e31 #846a29;
-      border-style: solid;
-      border-width: 1px;
-      cursor: pointer;
-      display: inline-block;
-      text-align: center;
-      text-decoration: none !important;
-      vertical-align: middle;
+  button, input#btnSubmit,
+  .btn.btn-primary.btn-sm.col-5 {
+    display: inline-block;
+    width: 99%;
+    margin-top: 12px;
+    padding: 10px;
+    background: #f0c14b;
+    border-color: #a88734 #9c7e31 #846a29;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none !important;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
   }
+
+  .btn.btn-primary.btn-sm.col-5:hover {
+    background-color: #a88734 #9c7e31 #846a29;
+    border: 1px solid #e9ecef;
+}
   
   .legal-info{
     font-size:12px;
     line-height:1.5;
     margin-top: 18px;
+    text-align: justify;
   }
   
   .register{

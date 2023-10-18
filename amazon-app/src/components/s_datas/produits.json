@@ -1,0 +1,163 @@
+[
+    {
+        "id": 1,
+        "categorie_id": 4,
+        "store_id": 1,
+        "designation": "Acer Aspire 1 A114-33-C8G7 Ordinateur Portable 14\" HD LCD (Intel® Celeron N4500, Ram 4 Go, SSD 128 Go, UHD Graphic, Windows 11)-Clavier AZERTY, Laptop Gris + Microsoft 365 Personnel Inclus",
+        "prix_unitaire": 150912.07,
+        "unite_emballage": "carton d'une piece",
+        "devise": "xaf beac",
+        "etat": "en stock",
+        "niveau_alerte": 75,
+        "seuil_recompletement": 25,
+        "details": {
+            "description": "Marque: Acer \n Référence constructeur: NX.A9JEF.00J \n Séries: Aspire A114-33-C8G7 \n Garantie constructeur: 2 ans constructeur \n Système d'exploitation: Windows 11 S \n Description du clavier: Traditionnel \n Marque du processeur: Intel \n Type de processeur: Celeron \n Vitesse du processeur: 2.8 GHz \n Nombre de coeurs: 1 \n Mémoire maximale: 16 Go \n Taille du disque dur: 128Go \n Technologie du disque dur: EMMC \n Taille de l'écran: 14\" \n Résolution de l'écran: 1280 x 720 pixels \n Marque chipset graphique: Intel \n Description de la carte graphique: Intégré \n Type de mémoire vive (carte graphique): Cache de niveau 2 \n Interface du matériel informatique: HDMI \n Nombre de ports USB 2.0: 1 \n Nombre de ports USB 3.0: 2 \n Type de connecteur: USB \n Logiciels inclus: Microsoft Office 365 \n Poids du produit: 1.61 Kilogrammes \n Divers: Portable \n Disponibilité des pièces détachées: Information indisponible sur les pièces détachées \n Mises à jour logicielles garanties jusqu’à: Information non disponible",
+            "photo_1": "https://m.media-amazon.com/images/I/71rkgoMl15L.__AC_SY300_SX300_QL70_ML2_.jpg",
+            "photo_2": "https://m.media-amazon.com/images/I/41TX7uT-39L._AC_US40_.jpg",
+            "photo_3": "https://m.media-amazon.com/images/I/31eML+9UthS._AC_US40_.jpg",
+            "photo_4": "https://m.media-amazon.com/images/I/41WPp2hFD5L._AC_US40_.jpg",
+            "photo_5": "https://m.media-amazon.com/images/I/417LL-r+ckL._AC_US40_.jpg",
+            "Video_explained": ""
+        },
+        "quantite_disponible": 200.00,
+        "created_at": "2023-09-27"
+    },
+    {
+        "id": 2,
+        "categorie_id": 4,
+        "store_id": 1,
+        "designation": "ASUS Vivobook 16 S1605PA-MB181W PC Portable 16” WUXGA (Intel Core i5-11300H, RAM 8 Go DDR4, SSD 512 Go, Windows 11 Home) Clavier AZERTY",
+        "prix_unitaire": 327427.82,
+        "unite_emballage": "carton d'une piece",
+        "devise": "xaf beac",
+        "etat": "en stock",
+        "niveau_alerte": 75,
+        "seuil_recompletement": 25,
+        "details": {
+            "description": "Marque: ASUS \n Numéro du modèle de l'article: Vivobook 16X \n séries: S1605PA-MB181W \n Couleur: Cool Silver (Argent) \n Garantie constructeur: 2 ans constructeur \n Système d'exploitation: Windows 11 \n Plate-forme du matériel informatique: PC \n Description du clavier: Jeu \n Marque du processeur: Intel \n Type de processeur: Core i5 \n Vitesse du processeur: 4.4 GHz \n Nombre de coeurs: 4 \n Taille de la mémoire vive: 4 \n Mémoire maximale: 8 Go \n Taille du disque dur: 512 Go \n Technologie du disque dur: SSD \n Interface du disque dur: Serial ATA \n Type d'écran: WUXGA \n Taille de l'écran: 16 Pouces \n Résolution de l'écran: 1920 x 1200 pixels \n Resolution: 1900x1200 Pixels \n Marque chipset graphique: Intel \n Description de la carte graphique: Intel UHD Graphics \n GPU: INTEL \n Type de mémoire vive (carte graphique): Shared \n Type de connectivité: Bluetooth - Wi-Fi \n Type de technologie sans fil: 802.11ac \n Interface du matériel informatique: USB Type C, Bluetooth 4.0, HDMI, USB 2.0 de type A, USB 3.2 Gen 1 \n Nombre de ports HDMI: 1 \n Nombre de ports USB 2.0: 1 \n Nombre de ports USB 3.0: 2 \n Type de connecteur: Bluetooth, Wi-Fi, USB, HDMI \n Logiciels inclus: Microsoft Office 365 \n Poids du produit: 1 Kilogrammes \n Divers: Portable \n Disponibilité des pièces détachées: Information indisponible sur les pièces détachées  \n Mises à jour logicielles garanties jusqu’à: Information non disponible",
+            "photo_1": "https://m.media-amazon.com/images/I/71DGDIoKP5L.__AC_SX300_SY300_QL70_ML2_.jpg",
+            "photo_2": "https://m.media-amazon.com/images/I/41yoccy1jbL._AC_US40_.jpg",
+            "photo_3": "https://m.media-amazon.com/images/I/415dbKxE+eL._AC_US40_.jpg",
+            "photo_4": "https://m.media-amazon.com/images/I/318Mymh2gQL._AC_US40_.jpg",
+            "photo_5": "https://m.media-amazon.com/images/I/31h+ZwSQ0DL._AC_US40_.jpg",
+            "Video_explained": "https://m.media-amazon.com/images/I/51i4F23rAXL.SS40_BG85,85,85_BR-120_PKdp-play-icon-overlay__.jpg"
+        },
+        "quantite_disponible": 200.00,
+        "created_at": "2023-09-27"
+    },
+    {
+        "id": 3,
+        "categorie_id": 4,
+        "store_id": 1,
+        "designation": "Acer Predator Helios Neo PHN16-71-92Z2 Ordinateur Portable Gaming 16'' WQXGA IPS 165 Hz, PC Gamer (Intel Core i9-13900HX, NVIDIA GeForce RTX 4070, RAM 16 Go, 1 To SSD, Windows 11) - Laptop Noir",
+        "prix_unitaire": 1312329.40,
+        "unite_emballage": "carton d'une piece",
+        "devise": "xaf beac",
+        "etat": "en stock",
+        "niveau_alerte": 40,
+        "seuil_recompletement": 25,
+        "details": {
+            "description": "Marque: Acer\nséries: Predator Helios\n Garantie constructeur: 2 ans constructeur \n Système d'exploitation: Windows 11 \n Description du clavier: Jeu \n Marque du processeur: Intel \n Type de processeur: Core i9 \n Vitesse du processeur: 5,4 GHz \n Nombre de coeurs: 1 \n Taille de la mémoire vive: 16 \n Mémoire maximale: 32 Go \n Taille du disque dur: 384 Go \n Technologie du disque dur: SSD \n Interface du disque dur: SSD \n Taille de l'écran: 16 Pouces \n Marque chipset graphique: NVIDIA \n Description de la carte graphique: Dédié \n Mémoire vive de la carte graphique: 8 Go \n Type de mémoire vive (carte graphique): Mémoire GDDR6 \n Type de connectivité: Bluetooth \n Interface du matériel informatique: Ethernet \n Nombre de ports USB 3.0: 3 \n Type de connecteur: Bluetooth \n Logiciels inclus: Microsoft Office 365 \n Divers: Portable \n Disponibilité des pièces détachées: Information indisponible sur les pièces détachées \n Mises à jour logicielles garanties jusqu’à: Information non disponible",
+            "photo_1": "https://m.media-amazon.com/images/I/71Z89ZNhh1L.__AC_SX300_SY300_QL70_ML2_.jpg",
+            "photo_2": "https://m.media-amazon.com/images/I/312N68zXEjL._AC_US40_.jpg",
+            "photo_3": "https://m.media-amazon.com/images/I/31LsNpGwMNL._AC_US40_.jpg",
+            "photo_4": "https://m.media-amazon.com/images/I/21LbJYT7jVL._AC_US40_.jpg",
+            "photo_5": "https://m.media-amazon.com/images/I/21mW2sc+RgL._AC_US40_.jpg",
+            "Video_explained": "https://www.amazon.fr/vdp/14ac6e77e6144deabd5ae9575d7d530a?ref=dp_vse_ibvc0"
+        },
+        "quantite_disponible": 100.00,
+        "created_at": "2023-09-27"
+    },
+    {
+        "id": 4,
+        "categorie_id": 4,
+        "store_id": 3,
+        "designation": "Lenovo IdeaPad Slim 3 Chrome 14M868 - Ordinateur Portable 14'' FHD (MediaTek Kompanio 520, RAM 8Go, SSD 128Go, Arm Mali-G52 2EE MC2 GPU, Chrome OS) Clavier AZERTY Français - Gris",
+        "prix_unitaire": 164035.43,
+        "unite_emballage": "carton d'une piece",
+        "devise": "xaf beac",
+        "etat": "en stock",
+        "niveau_alerte": 80,
+        "seuil_recompletement": 30,
+        "details": {
+            "description": "Marque: Lenovo \n séries: IdeaPad Slim 3 Chrome 14M868 \n Couleur: Gris nuage \n Garantie constructeur: 2 ans \n Système d'exploitation: Chrome OS \n Description du clavier: French keyboard \n Marque du processeur: MediaTek \n Type de processeur: MediaTek Helio \n Vitesse du processeur: 2.05 \n Nombre de coeurs: 8 \n Mémoire maximale: 8 Go\n Taille du disque dur: 128\n Technologie du disque dur: SSD\n Interface du disque dur: SSD \n Taille de l'écran: 14 \n Marque chipset graphique: MediaTek \n Description de la carte graphique: Intégré \n Type de mémoire vive (carte graphique): Shared \n Nombre de ports USB 3.0: 2 \n Logiciels inclus: Internet Security \n Poids du produit: 1,3 Kilogrammes \n Divers: Portable \n Disponibilité des pièces détachées: Information indisponible sur les pièces détachées \n Mises à jour logicielles garanties jusqu’à: Information non disponible",
+            "photo_1": "https://m.media-amazon.com/images/I/71Wn6w9IooL.__AC_SY300_SX300_QL70_ML2_.jpg",
+            "photo_2": "https://m.media-amazon.com/images/I/31ZhaE8GjFL._AC_US40_.jpg",
+            "photo_3": "https://m.media-amazon.com/images/I/315TKhONCbL._AC_US40_.jpg",
+            "photo_4": "https://m.media-amazon.com/images/I/31VAhOJ-5xL._AC_US40_.jpg",
+            "photo_5": "https://m.media-amazon.com/images/I/31UMXwxJCcL._AC_US40_.jpg",
+            "Video_explained": "https://www.amazon.fr/vdp/139a9fce25a8465bba07f8767b549f53?ref=dp_vse_ibvc0"
+        },
+        "quantite_disponible": 250.00,
+        "created_at": "2023-09-27"
+    },
+    {
+        "id": 5,
+        "categorie_id": 2,
+        "store_id": 5,
+        "designation": "Pampers Couches Premium Protection Taille 3 (6-10 kg), 204 Couches Bébé, Pack 1 Mois, Notre N°1 Pour La Protection Des Peaux Sensibles",
+        "prix_unitaire": 31233.60,
+        "unite_emballage": "paquet de 204 unites",
+        "devise": "xaf beac",
+        "etat": "en stock",
+        "niveau_alerte": 500,
+        "seuil_recompletement": 125,
+        "details": {
+            "description": "Unités: 204 unité \n Pays d'origine: Germany \n Marque: Pampers \n Âge: Nourrisson \n Pays d'origine: Allemagne",
+            "photo_1": "https://m.media-amazon.com/images/I/71bbXFsdl+L._AC_SX425_.jpg",
+            "photo_2": "https://m.media-amazon.com/images/I/41DB5S8y12L._AC_US40_.jpg",
+            "photo_3": "https://m.media-amazon.com/images/I/515YaM1HPML._AC_US40_.jpg",
+            "photo_4": "https://m.media-amazon.com/images/I/51bM9Td1a6L._AC_US40_.jpg",
+            "photo_5": "https://m.media-amazon.com/images/I/51THy+HeRvL._AC_US40_.jpg",
+            "Video_explained": "https://www.amazon.fr/vdp/136bdbf8114f4a6fa108ff1209c990a5?ref=dp_vse_ibvc0"
+        },
+        "quantite_disponible": 10000.00,
+        "created_at": "2023-09-27"
+    },
+    {
+        "id": 6,
+        "categorie_id": 2,
+        "store_id": 5,
+        "designation": "BIOLANE - Lingettes nettoyantes H2O à l'eau pour bébé - Lot de 12x72 (864 lingettes) - Peaux sensibles - Nettoie et protège, le visage et le siège - Sans rinçage - Dès la naissance",
+        "prix_unitaire": 15669.29,
+        "unite_emballage": "paquet de 864 unites",
+        "devise": "xaf beac",
+        "etat": "en stock",
+        "niveau_alerte": 500,
+        "seuil_recompletement": 125,
+        "details": {
+            "description": "Marque: Biolane \n Couleur: Bleu \n Caractéristiques spéciales: À L'eau \n Matière: AQUA (WATER); PARFUM (FRAGRANCE) ; LEVULINIC ACID ; SODIUM BENZOATE ; GLYCERIN ; SODIUM LEVULINATE ; SODIUM HYDROXIDE \n Disponibilité des pièces détachées: Information indisponible sur les pièces détachées \n Mises à jour logicielles garanties jusqu’à: Information non disponible",
+            "photo_1": "https://m.media-amazon.com/images/I/71S61K8mttL._AC_SX679_.jpg",
+            "photo_2": "https://m.media-amazon.com/images/I/41KYX92ZG5L._AC_US40_.jpg",
+            "photo_3": "https://m.media-amazon.com/images/I/41DrRpGHqLL._AC_US40_.jpg",
+            "photo_4": "https://m.media-amazon.com/images/I/41jpxDFu9jL._AC_US40_.jpg",
+            "photo_5": "https://m.media-amazon.com/images/I/51-+G7SPD+L._AC_US40_.jpg",
+            "Video_explained": "https://www.amazon.fr/vdp/123a5b1192c041d69c7d5badbde0ea6c?ref=dp_vse_ibvc0"
+        },
+        "quantite_disponible": 120000.00,
+        "created_at": "2023-09-27"        
+    },
+    {
+        "id": 7,
+        "categorie_id": 2,
+        "store_id": 5,
+        "designation": "BIOLANE - Huile d'amande douce - Bébé - Hydrate et protège la peau - Vitamine E - Soin - Bain - Massage - 100% d'origine naturelle - Fabriqué en France",
+        "prix_unitaire": 2500.55,
+        "unite_emballage": "paquet de 4 unites",
+        "devise": "xaf beac",
+        "etat": "en stock",
+        "niveau_alerte": 500,
+        "seuil_recompletement": 125,
+        "details": {
+            "description": "HUILE D'AMANDE DOUCE : Hydratez bébé avec l'huile d'amande douce de Biolane, un spray qui nourrit et adoucit la peau de votre bébé. Testé cliniquement, il convient aux peaux sensibles. Idéale pour un massage après la toilette, cette huile procure un moment de douceur avec bébé \\r\\n INGRÉDIENTS D’ORIGINE NATURELLE : Formulé à 100% d'ingrédients d'origine naturelle, les acides gras essentiels de l'amande douce nourrissent l'épiderme du bébé. Soumise aux agressions extérieures de l'environnement, la peau de bébé peut s'assécher, la vitamine E permet de lutter contre le dessèchement cutané. Pour une hydratation en douceur et 100% naturelle ! \\n\\r CORPS ET BAIN : L'huile d'amande adoucit et nourrit intensément la peau sensible de votre bébé. Ajoutez-le dans le bain, l'huile d'amande douce recouvre naturellement la peau de bébé et forme un film protecteur. Sa peau sera douce et protégée. Cette huile convient également pour éliminer les croûtes de lait, appliquez sur le cuir chevelu et laissez reposer \\n\\r TESTÉE CLINIQUEMENT : Une formule testée cliniquement pour la plus grande sécurité des nouveau-nés. Cette huile d'amande douce allie douceur et plaisir, la peau de bébé sera hydratée et apaisée \\n\\r FABRIQUÉ EN FRANCE : L'huile d'amande douce est fabriqué en France, favorisant l'emploi local et assurant une grande qualité de produit. Très pratique à transporter, l'huile Biolane est proposée en format 75ml. Le spray offre une application simple et précise",
+            "photo_1": "https://m.media-amazon.com/images/I/61A53pMVYcL._AC._SR360,460.jpg",
+            "photo_2": "",
+            "photo_3": "",
+            "photo_4": "",
+            "photo_5": "",
+            "Video_explained": ""
+        },
+        "quantite_disponible": 120000.00,
+        "created_at": "2023-09-27"        
+    }
+]
