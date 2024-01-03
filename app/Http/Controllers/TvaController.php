@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AmazonTva;
+use App\Models\Tva;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Exception;
 
 class TvaController extends Controller
@@ -13,105 +15,229 @@ class TvaController extends Controller
      */
     public function index()
     {
-        $tva = AmazonTva::all()->orderBy('taux')->get();
+        $user = Auth::user();
+        
+        $user_infos = User::where('id', $user->id)->first();
+        
+        if($user_infos){
 
-        return view('grille_tva',[
-            'tableau_tva' => $tva
-        ]);
+            $tva = Tva::all();
+
+            if($tva){
+
+                return response()->json([
+                    "status"=> 200,
+                    "message" => "TVA chargées avec succès",
+                    "tva" => $tva
+                ]);
+            }else{
+                return response()->json([
+                    "status"=> 404,
+                    "message" => "TVA introuvable"
+                ]);
+            }
+        }else{
+            return response()->json([
+                "status"=> 401,
+                "message" => "Reconnetez-vous, votre session a expiré."
+            ]);
+        }   
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getTva()
     {
-        //
+        $user = Auth::user();
+        
+        $user_infos = User::where('id', $user->id)->first();
+        
+        if($user_infos){
+
+            $tva = Tva::first();
+
+            if($tva){
+
+                return response()->json([
+                    "status"=> 200,
+                    "message" => "TVA chargées avec succès",
+                    "tva" => $tva
+                ]);
+            }else{
+                return response()->json([
+                    "status"=> 404,
+                    "message" => "TVA introuvable"
+                ]);
+            }
+        }else{
+            return response()->json([
+                "status"=> 401,
+                "message" => "Reconnetez-vous, votre session a expiré."
+            ]);
+        }   
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {        
-        // validation des donnees
-        $request->validate([
-            "taux" => "required|decimal:2",
-            "description" => "required|unique:amazon_tva,description"
-        ]);
+    public function store(Request $request){
+        
+        $user = Auth::user();
+        
+        $user_infos = User::where('id', $user->id)->first();
+        
+        if($user_infos){
+            // validation des donnees
+            $request->validate([
+                "name" => "required|unique:tva,name",
+                "taux" => "required|decimal:2|min:1.1"
+            ]);
 
-        try {
-            // traitement des donnees
-            $new_tva = new AmazonTva();
+            try {
+                // traitement des donnees
+                $tva = new Tva();
 
-            $new_tva->taux = $request->taux;
-            $new_tva->description = $request->description;
-            $new_tva->created_at = now();
+                $tva->name = $request->name;
+                $tva->taux = $request->taux;
+                $tva->details = $request->details;
+                $tva->created_at = now();
 
-            $new_tva->save();
+                $tva->save();
 
-            return redirect('/show_grille_tva')->with(['message' => 'Nouveau taux TVA cree avec succes.']);
-        } catch (Exception $e) {
-            return response()->json($e);
+                return response()->json([
+                    "status"=> 200,
+                    "message" => "TVA ajouté avec succès."
+                ]);
+                
+            } catch (Exception $e) {
+                return response()->json([
+                    "status"=> $e->getCode(),     
+                    "message" => $e->getMessage()            
+                ]);
+            }
+        }else{
+            return response()->json([
+                "status"=> 401,
+                "message" => "Reconnetez-vous, votre session a expiré."
+            ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        return view('show_grille_tva');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $user = Auth::user();
+        
+        $user_infos = User::where('id', $user->id)->first();
+        
+        if($user_infos){
+
+            $tva = Tva::find($id);
+
+            if($tva){
+
+                return response()->json([
+                    "status"=> 200,
+                    "tva" => $tva
+                ]);
+            }else{
+
+                return response()->json([
+                    "status"=> 404,
+                    "message" => "TVA introuvable."
+                ]);
+            }
+        }else{
+
+            return response()->json([
+                "status"=> 401,
+                "message" => "Reconnetez-vous, votre session a expiré."
+            ]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        // validation des donnees
-        $request->validate([
-            "taux" => "required|decimal:2",
-            "description" => "required"
-        ]);
+        $user = Auth::user();
+        
+        $user_infos = User::where('id', $user->id)->first();
+        
+        if($user_infos){
 
-        try {
-            // traitement des donnees
-            $tva = AmazonTva::find($request->id);
-
-            $tva->update([
-                'taux' => $request->taux,
-                'description' => $request->description,
-                'updated_at' => now()
+            // validation des donnees
+            $request->validate([
+                "name" => "required",
+                "taux" => "required|decimal:2|min:1.1"
             ]);
 
-            return redirect('/grille_tva')->with(['message' => 'Mise a jour taux TVA reussie.']);
-        } catch (Exception $e) {
-            return response()->json($e);
+            try {
+                // traitement des donnees
+                $tva = Tva::find($id);
+
+                $tva->update([
+                    'name' => $request->name,
+                    'taux' => $request->taux,
+                    'details' => $request->details,
+                    'updated_at' => now()
+                ]);
+
+                return response()->json([
+                    "status"=> 200,
+                    "message" => "TVA modifiée avec succès."
+                ]);
+
+            } catch (Exception $e) {
+
+                return response()->json([
+                    "status"=> $e->getCode(),     
+                    "message" => $e->getMessage()            
+                ]);
+            }
+        }else{
+
+            return response()->json([
+                "status"=> 401,
+                "message" => "Reconnetez-vous, votre session a expiré."
+            ]);
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
 
-        try {
-            // traitement des donnees
-            $tva = AmazonTva::find($id);
-            $tva->delete();
+        $user = Auth::user();
+        
+        $user_infos = User::where('id', $user->id)->first();
+        
+        if($user_infos){
+            $tva = Tva::find($id);
 
-            return redirect('/grille_tva')->with(['message' => 'Suppression taux TVA reussie.']);
-        } catch (Exception $e) {
-            return response()->json($e);
+            if($tva){
+                $tva->delete();
+
+                return response()->json([
+                    "status"=> 200,
+                    "message" => "TVA supprimée avec success."
+                ]);
+
+            }else{
+
+                return response()->json([
+                    "status"=> 404,
+                    "message" => "TVA introuvable."
+                ]);
+            }
+        }else{
+
+            return response()->json([
+                "status"=> 401,
+                "message" => "Reconnetez-vous, votre session a expiré."
+            ]);
         }
     }
 }

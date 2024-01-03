@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+//use App\Models\Profile;
 use App\Models\Role;
 use App\Models\User;
 use DateTime;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -56,7 +58,11 @@ class UserController extends Controller
                 "message" => "Votre compte a ete cree avec succes. Un email de verification via l'adresse specifiee pour valider votre compte."
             ], 200);
         } catch (Exception $e) {
-            return response()->json($e);
+
+            return response()->json([
+                "status"=> $e->getCode(),     
+                "message" => $e->getMessage()            
+            ]);
         }
     }
 
@@ -76,96 +82,166 @@ class UserController extends Controller
                 $expires_at = new DateTime();
                 $expires_at->modify("+120 minute");
 
-                //$expires_at = date("Y-m-d H:i:s", time()+(3*3600));
-
                 // creer un jeton/token                
                 $token = $user->createToken("auth_token", ['*'], $expires_at)->plainTextToken;
+
+                // recuperer l'adresse de l'utilisateur
+                $adresse = User::find($user->id)->profile;
                 
                 // connexion reussie
                 return response()->json([
-                    "status_code" => 1,
+                    "status" => 200,
                     "message" => "Connexion reussie",
                     "user" => $user,
                     "role_name" => $user->getRoleNames(),
                     "access_token" => $token,
-                    "expires_token" => $expires_at
-                ], 201);
+                    "expires_token" => $expires_at,
+                    "user_adresse" => $adresse
+                ]);
 
             }else{
                 return response()->json([
-                    'status_code' => 0,
+                    'status' => 401,
                     'message' => 'Mot de passe incorrect'
-                ], 401);
+                ]);
             }
         }else{
             return response()->json([
-                'status' => 0,
+                'status' => 404,
                 'message' => 'Compte inexistant'
-            ], 404);
+            ]);
         }
-
     }
-
 
     public function logout(){
 
         //on recupere l'utilisateur connecte
         $user = Auth::user();
+        $user->tokens()->delete();
 
-        if(!$user){
-            return response()->json([
-                "status_code" => 0,
-                "errors" => 401,
-                "message" => "utilisateur non trouve"
-            ]);
-        }else{
-            try {
-                $user->tokens()->delete();
+        // on invalide le token
+        $expires_at = new DateTime();
+        $expires_at->modify("-2880 minutes");        
 
-                // deconnexion reussie
-            return response()->json([
-                "status_code" => 1,
-                "errors" => 200,
-                "message" => "Deconnexion reussie",
-                "user" => $user
-            ]);
-            } catch (Exception $e) {
-                return response()->json($e);
-            }
-        }
+        // deconnexion reussie
+        return response()->json([
+            "status" => 200,
+            "message" => "Deconnexion reussie, veuillez rafraichir votre page.",
+            "expires_token" => $expires_at
+        ]);
     }
 
-    public function update(Request $request, $id){
+    public function updateUsername(Request $request, $id){
 
         //validation des donnees
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
+            "name" => "required"
         ]);
 
         try {
             // traitement des donnees
-            $user = User::find($id);
+            $user = User::find($id);            
 
             if(!$user){
+
                 return response()->json([
-                    "status_code" => 0,
-                    "message" => "Utilisateur inexistant.",
-                ], 404);
-            }
+                    "status" => 404,
+                    "message" => "Compte utilisateur inexistant.",
+                ]);
+            }else{
 
-            $user->update([
-                "name" => $request->name,
-                "email" => $request->email,
-                "updated_at" => now()
-            ]);            
-
-            return response()->json([
-                "status_code" => 1,
-                "message" => "Utilisateur mis a jour avec succes."
-            ], 200);
+                $user->name = $request->name;
+                $user->updated_at = now();
+                $user->save(); 
+    
+                return response()->json([
+                    "status" => 200,
+                    "message" => "Nom d'utilisateur modifié avec succes."
+                ]);
+            }            
         } catch (Exception $e) {
-            return response()->json($e);
+
+            // echec de mise a jour
+            return response()->json([
+                "status"=> $e->getCode(),     
+                "message" => $e->getMessage()            
+            ]);
+        }
+    }
+
+    public function updateEmail(Request $request, $id){
+
+        //validation des donnees
+        $request->validate([
+            "email" => "required|email"
+        ]);
+
+        try {
+            // traitement des donnees
+            $user = User::find($id);            
+
+            if(!$user){
+
+                return response()->json([
+                    "status" => 404,
+                    "message" => "Compte utilisateur inexistant.",
+                ]);
+            }else{
+
+                $user->email = $request->email;
+                $user->updated_at = now();
+                $user->save(); 
+    
+                return response()->json([
+                    "status" => 200,
+                    "message" => "Adresse email modifiée avec succes."
+                ]);
+            }            
+        } catch (Exception $e) {
+
+            // echec de mise a jour
+            return response()->json([
+                "status"=> $e->getCode(),     
+                "message" => $e->getMessage()            
+            ]);
+        }
+    }
+
+    public function updatePassword(Request $request, $id){
+
+        //validation des donnees
+        $request->validate([
+            "password" => "required|confirmed|min:8"
+        ]);
+
+        try {
+            // traitement des donnees
+            $user = User::find($id);            
+
+            if(!$user){
+
+                return response()->json([
+                    "status" => 404,
+                    "message" => "Compte utilisateur inexistant.",
+                ]);
+            }else{
+
+                $user->password = Hash::make($request->password, ['rounds' => 12]);
+                $user->updated_at = now();
+                $user->save(); 
+    
+                return response()->json([
+                    "status" => 200,
+                    "message" => "Mot de passe reinitialisé modifié avec succes."
+                ]);
+            }            
+        } catch (Exception $e) {
+
+            // echec de mise a jour
+            return response()->json([
+                "status"=> $e->getCode(),     
+                "message" => $e->getMessage()                            
+            ]);
         }
     }
 
@@ -187,15 +263,50 @@ class UserController extends Controller
                 "user" => $user
             ], 200);
         } catch (Exception $e) {
-            return response()->json($e);
+
+            return response()->json([
+                "status"=> $e->getCode(),     
+                "message" => $e->getMessage()            
+            ]);
         }
+    }
+
+    public function getUserAccount(){
+
+        $user = Auth::user();
+
+        $account_found = User::find($user->id);
+
+        if(!$account_found){
+
+            return response()->json([
+                "status" => 404,
+                "message" => "Compte utilisateur inexistant",
+            ]);
+        }else{
+
+            // user roles
+            $user_roles = DB::table('model_has_roles')
+                ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+                ->where("model_has_roles.model_id", "=", $user->id)
+                ->select('roles.*')
+                ->get();
+
+            return response()->json([
+                "status" => 200,
+                "user_account" => $account_found,
+                "user_roles" => $user_roles,
+                "id" => $user->id
+            ]);
+        }
+        
     }
 
     public function edit($id){
 
         try {
             // traitement des donnees
-            $user = User::find($id);
+            $user = User::find($id)->get();
 
             if(!$user){
                 return response()->json([
@@ -209,7 +320,11 @@ class UserController extends Controller
                 "user" => $user
             ], 200);
         } catch (Exception $e) {
-            return response()->json($e);
+
+            return response()->json([
+                "status"=> $e->getCode(),     
+                "message" => $e->getMessage()            
+            ]);
         }
     }
 
@@ -217,7 +332,7 @@ class UserController extends Controller
 
         try {
             // traitement des donnees
-            $user = User::find($id);
+            $user = User::find($id)->get();
 
             if(!$user){
                 return response()->json([
@@ -233,7 +348,11 @@ class UserController extends Controller
                 "message" => "Utilisateur supprime avec succes.",
             ]);
         } catch (Exception $e) {
-            return response()->json($e);
+
+            return response()->json([
+                "status"=> $e->getCode(),     
+                "message" => $e->getMessage()            
+            ]);
         }
     }
 }

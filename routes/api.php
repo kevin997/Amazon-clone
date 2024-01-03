@@ -1,15 +1,18 @@
 <?php
 
 //use App\Http\Controllers\BecomeSellerController;
-use App\Http\Controllers\CategorieProduitController;
-//use App\Http\Controllers\DetailProduitController;
-use App\Http\Controllers\PanierController;
-use App\Http\Controllers\PlanVenteController;
-use App\Http\Controllers\ProduitController;
-//use App\Http\Controllers\StockController;
-use App\Http\Controllers\StoreController;
+
+use App\Http\Controllers\BankAccountController;
+use App\Http\Controllers\CartShopController;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CreditCardController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TvaController;
 use App\Http\Controllers\UserController;
+use App\Models\Shop;
 //use App\Http\Controllers\UserProfileController;
 //use App\Models\UserProfile;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -28,6 +31,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+//*************************ROUTES FOR EVERYONE *********************** */
+
+
 // test
 Route::get('/test', function(){
     return ('test');
@@ -36,28 +43,20 @@ Route::get('/test', function(){
 // inscription
 Route::post('/register', [UserController::class, 'register']);
 
-// connexion
+// login
 Route::post('/login', [UserController::class, 'login']);
 
-// get users
-Route::get('/users', [UserController::class, 'index']);
+// afficher la liste des categories produit pour la page d'accueil
+Route::get('/get-category', [CategorieController::class, 'getCategory']);
 
-// show user
-Route::get('/view_user/{id}', [UserController::class, 'show']);
+// afficher le catalogue produits sur la Home Page
+Route::get('/show-products', [ProductController::class, 'show']);
 
-// edit user
-Route::get('/edit_user/{id}', [UserController::class, 'edit']);
+// afficher le catalogue produits en fonction de criteres de recherche sur la Home Page 
+Route::post('/find-products', [ProductController::class, 'foundProduct']);
 
-// delete user
-Route::delete('/delete_user/{id}', [UserController::class, 'destroy']);
-
-// update user
-Route::patch('/update_user/{id}', [UserController::class, 'update']);
-
-// Protection de certaines routes
-Route::get('/profile', function () {
-    // Only verified users may access this route...
-})->middleware(['auth', 'verified']);
+// afficher le produit selectionne
+Route::get('/show-product/{id}', [ProductController::class, 'getSingle']);
 
 
 
@@ -68,157 +67,159 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//*************************ROUTES FOR EVERYONE *********************** */
-
-
-// inscription
-//Route::post('register', [UserController::class, 'register']);
-
-
-
-// afficher tout le catalogue des produits
-Route::get('/catalogue/produit', [ProduitController::class, 'index']);
-
-// voir description d'un produit
-Route::get('/catalogue/produit/{id}', [ProduitController::class, 'show']);
-
+// Protection de certaines routes
+Route::get('/profile', function () {
+    // Only verified users may access this route...
+})->middleware(['auth', 'verified']);
 
 
 //*************************ROUTES EXCLUSIVEMENT RESERVEES AUX UTILISATEURS AUTHENTIFIES *********************** */
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
+    
+//*********************** TVA ********************************* */
 
-    // deconnexion de l'utilisateur
-    Route::post('/logout',   [UserController::class, 'logout']);
+    // creer une tva
+    Route::post('/add-tva', [TvaController::class, 'store']);
 
-    // devenir un vendeur
-    //Route::post('/become_seller', [BecomeSellerController::class, 'createStore']);
+    // afficher la liste des tva
+    Route::get('/view-tva', [TvaController::class, 'index']);
 
-    // creer un profil
-    //Route::post('/create_profil', [UserProfileController::class, 'store']);
+    // afficher la liste des tva
+    Route::get('/edit-tva/{id}', [TvaController::class, 'edit']);
 
-    // afficher les infos du profil
-    //Route::get('/profil', [UserProfileControalleerProfileController::class, 'update']);
+    // recuperer la tva pour facturation commande
+    Route::get('/get-tva', [TvaController::class, 'getTva']);
 
-    // detail du profil
-    //Route::get('/edit_profil/{id}', [UserProfileController::class, 'edit']);
+    // supprimer une tva
+    Route::patch('/update-tva/{id}', [TvaController::class, 'update']);
 
-    // delete profil
-    //Route::delete('/delete_profil/{id}', [UserProfileController::class, 'delete']);    
+    // supprimer une tva
+    Route::delete('/delete-tva/{id}', [TvaController::class, 'destroy']);
 
-    // creer un taux de tva
-    Route::post('/create_tva', [TvaController::class, 'store']);
 
-    // afficher la grille des tva
-    Route::get('/tva', [TvaController::class, 'index']);
 
-    // editer un taux de tva
-    Route::get('/edit_tva/{id}', [TvaController::class, 'edit']);
-
-    // mise a jour du taux tva
-    Route::patch('/update_tva/{id}', [TvaController::class, 'update']);
-
-    // suppression du taux tva
-    Route::delete('/delete_tva/{id}', [TvaController::class, 'destroy']);    
-
-    // creer un store pour un vendeur
-    Route::post('/create_store', [StoreController::class, 'create']);
-
-    // afficher liste des stores pour un vendeur
-    Route::get('/store/{id}', [StoreController::class, 'show']);
-
-    // afficher liste des stores
-    Route::get('/store', [StoreController::class, 'index']);
-
-    // mise a jour du store (boutique)
-    Route::patch('/update_store/{id}', [StoreController::class, 'update']);
-
-    // fermeture du store (boutique) par son proprietaire
-    Route::patch('/close_store/{id}', [StoreController::class, 'close']);    //status = "closed"
-
-    // suppression du store (boutique) par l'administrateur
-    Route::delete('/delete_store/{id}', [StoreController::class, 'delete']);     //status = "deleted"
-
-    // editer la liste des stores pour vendeur
-    Route::get('/edit_store/{id}', [StoreContralleeoller::class, 'edit']);
-
-    // creer un plan de vente
-    Route::post('/create_plan_vente', [PlanVenteController::class, 'store']);
-
-    // afficher la liste des plans de vente
-    Route::get('/plan_vente', [PlanVenteController::class, 'index']);
-
-    // editer un plan de vente
-    Route::get('/edit_plan_vente/{id}', [PlanVenteController::class, 'edit']);
-
-    // mise a jour d'un plan de vente
-    Route::patch('/update_plan_vente/{id}', [PlanVenteController::class, 'update']);
-
-    // suppression d'un plan de vente
-    Route::delete('/delete_plan_vente/{id}', [PlanVenteController::class, 'delete']);    
-
-    // afficher un plan de vente
-    Route::get('/plan_vente/{id}', [PlanVenteController::class, 'show']);
+    //*********************** CATEGORY ********************************* */
 
     // creer une categorie produit
-    Route::post('/create_categorie_produit', [CategorieProduitController::class, 'store']);    
-
-    // mise a jour d'une categorie produit
-    Route::patch('/update_categorie_produit/{id}', [CategorieProduitController::class, 'update']);
+    Route::post('/add-category', [CategorieController::class, 'store']);
+    
+    // afficher la liste des categories produit
+    Route::get('/view-category', [CategorieController::class, 'index']);    
 
     // afficher la liste des categories produit
-    Route::get('/categorie_produit', [CategorieProduitController::class, 'index']);
-
-    // editer une categorie produit
-    Route::get('/edit_categorie_produit/{id}', [CategorieProduitController::class, 'edit']);
+    Route::get('/show-category', [CategorieController::class, 'show']);
+           
+    // afficher la liste des categories produit
+    Route::get('/edit-category/{id}', [CategorieController::class, 'edit']);
 
     // mise a jour d'une categorie produit
-    Route::patch('/update_categorie_produit/{id}', [CategorieProduitController::class, 'update']);
+    Route::post('/update-category/{id}', [CategorieController::class, 'update']);
 
-    // suppression d'une categorie produit
-    Route::delete('/delete_categorie_produit/{id}', [CategorieProduitController::class, 'delete']);
+    // Suppression d'une categorie
+    Route::delete('/delete-category/{id}', [CategorieController::class, 'destroy']);
 
-    // creer un produit au profit d'un store
-    Route::post('/create_product', [ProduitController::class, 'store']);
 
-    // afficher le catalogue de produits
-    Route::get('/catalogue_product', [ProduitController::class, 'index']);
+    //*********************** SHOP ********************************* */
 
-    // afficher un produits
-    Route::get('/catalogue_product/{id}', [ProduitController::class, 'show']);
+    // creer une boutique
+    Route::post('/add-shop', [ShopController::class, 'store']);
 
-    // afficher le catalogue de produits par boutique
-    Route::get('/catalogue_product_from_store/{id}', [ProduitController::class, 'showStoreProduct']);
+    // afficher la liste des boutiques
+    Route::get('/view-shop', [ShopController::class, 'index']);
 
-    // editer un produit
-    Route::get('/edit_product/{id}', [ProduitController::class, 'edit']);    
+    // afficher la liste des boutiques
+    Route::get('/show-shop', [ShopController::class, 'show']);
 
-    // mise a jour d'un produit
-    Route::patch('/update_product/{id}', [ProduitController::class, 'update']);
+    // editer une boutique specifique
+    Route::get('/edit-shop/{id}', [ShopController::class, 'edit']);
 
-    // sortie d'un produit du catalogue
-    Route::patch('/remove_produit/{id}', [ProduitController::class, 'remove']); // etat = "indisponible"
+    // suppression d'une boutique
+    Route::delete('/delete-shop/{id}', [ShopController::class, 'destroy']);
 
-    // suppression du produit du catalogue par l'administrateur
-    Route::patch('/delete_produit/{id}', [ProduitController::class, 'delete']);    // etat = "definitivement supprime"
+    // mise a jour d'une boutique
+    Route::post('/update-shop/{id}', [ShopController::class, 'update']);
 
-    // mise a jour d'un stock
-    //Route::patch('/update_stock/{id}', [StockalleeController::class, 'Update']);
+    //*********************** PRODUCTS ********************************* */
 
-    // creation du panier d'achats
-    Route::post('/add_to_cart', [PanierController::class, 'AjouterLignePanier']);
+    // creer un produit
+    Route::post('/add-product', [ProductController::class, 'store']);
 
-    // retirer du panier d'achats
-    Route::post('/remove_to_cart', [PanierController::class, 'SupprimerLignePanier']);
+    // creer un produit
+    Route::get('/view-product', [ProductController::class, 'index']);
 
-    // vider le panier d'achats
-    Route::post('/empty_cart', [PanierController::class, 'ViderPanier']);
+    // creer un produit
+    Route::get('/edit-product/{id}', [ProductController::class, 'edit']);
 
-    // valider le panier d'achats
-    Route::post('/validate_cart', [PanierController::class, 'ValiderPanier']);
+    // modifier un produit
+    Route::post('/update-product/{id}', [ProductController::class, 'update']);
 
-    // afficher un panier d'achats
-    Route::post('/orders/place_order/{id}', [PanierController::class, 'index']);
+    // supprimer un produit
+    Route::delete('/delete-product/{id}', [ProductController::class, 'destroy']);
+
+
+//************************** CART-SHOP ************************************** */
+
+
+    // ajout d'un produit dans le panier
+    Route::post('/add-cartshop', [CartShopController::class, 'store']);
+
+    // ajout d'un produit dans le panier
+    Route::get('/view-cartshop', [CartShopController::class, 'view']);
+
+    // update cartshop quantity
+    Route::patch('/cartshop-updatequantity/{cart_id}/{art_id}/{scope}', [CartShopController::class, 'updatequantity']);
+
+    // supprimer une ligne du panier
+    Route::delete('/delete-cart-item/{cart_id}', [CartShopController::class, 'deleteCartitem']);
+
+
+    //************************** ORDERS ************************************** */
+
+    // enregistre une commande
+    Route::post('/place-order', [CheckoutController::class, 'placeOrder']);
+
+    //************************** USERS ************************************** */
+
+    // deconnexion de l'utilisateur
+    Route::post('/logout', [UserController::class, 'logout']);
+
+    // mise a jour du nom d'utilisateur
+    Route::post('/update-username/{id}', [UserController::class, 'updateUsername']);
+
+    // mise a jour du nom d'utilisateur
+    Route::post('/update-email/{id}', [UserController::class, 'updateEmail']);
+
+    // mise a jour du nom d'utilisateur
+    Route::post('/update-password/{id}', [UserController::class, 'updatePassword']);
+
+    // recuperer les infos du compte utilisateur
+    Route::get('/account-user', [UserController::class, 'getUserAccount']);
+
+    // enregistrer un profil utilisateur
+    Route::post('/add-profile', [ProfileController::class, 'store']);
+
+    // afficher un profil utilisateur
+    Route::get('/get-profile', [ProfileController::class, 'getProfile']);
+
+    // mise a jour du profil utilisateur
+    Route::post('/update-profile/{id}', [ProfileController::class, 'update']);
+
+    // ajout compte bancaire utilisateur
+    Route::post('/add-user-bank-account', [BankAccountController::class, 'store']);
+
+    // ajout carte de credit utilisateur
+    Route::post('/add-user-credit-card', [CreditCardController::class, 'store']);
+
+    // recuperer les cartes de credit utilisateur
+    Route::get('/view-user-credit-card', [CreditCardController::class, 'index']);
+
+    // recuperer les cartes de credit utilisateur
+    Route::get('/view-user-bank-account', [BankAccountController::class, 'index']);
+
+    
+
+    
     
 
     //*************************EMAIL MANAGE ******************************************* */
